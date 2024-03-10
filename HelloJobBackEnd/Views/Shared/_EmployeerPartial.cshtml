@@ -1,0 +1,93 @@
+﻿@model List<Request>
+@{
+    int count = 1;
+}
+<p>Gözləmədə olan müraciətlər</p>
+<table class="table caption-top">
+   
+    <thead>
+        <tr class="text-center ">
+            <th scope="col">№</th>
+            <th scope="col"> Müraciət edənin adı </th>
+            <th scope="col">Müraciət edənin Vəzifəsi</th>
+            <th scope="col">Müraciət edənin E-poçtu</th>
+            <th scope="col">Şirkətin adı</th>
+            <th scope="col">Şirkətin tələb etdiyi vəzifə</th>
+            <th scope="col">Şirkətin E-poçtu</th>
+            <th scope="col">Müraciətin Statusu</th>
+                @if (User.IsInRole(UserRole.business.ToString()))
+            {
+                <th scope="col">Qəbul et/İmtina et</th>
+            }
+            else
+            {
+                <th scope="col">Silmək</th>
+            }
+   
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var request in Model)
+        {
+            @foreach (var item in request.RequestItems)
+            {
+
+                <tr class="text-center ">
+                    <td scope="row">@count</td>
+                    <td>
+                        <a asp-controller="cvpage" asp-action="detail" asp-route-id="@item.Cv.Id" class="text-decoration-none" target="_blank">
+                            @item.Cv.Name
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-controller="cvpage" asp-action="detail" asp-route-id="@item.Cv.Id" class="text-decoration-none" target="_blank">
+                            @item.Cv.Position
+                        </a>
+                  
+                        </td>
+                    <td>
+                        <a asp-controller="cvpage" asp-action="detail" asp-route-id="@item.Cv.Id" class="text-decoration-none" target="_blank">
+                            @item.Cv.Email
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-controller="company" asp-action="vacansdetail" asp-route-id="@item.Vacans.Id" class="text-decoration-none" target="_blank">
+                            @item.Vacans.Company.Name
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-controller="company" asp-action="vacansdetail" asp-route-id="@item.Vacans.Id" class="text-decoration-none" target="_blank">
+                            @item.Vacans.Position
+                        </a>
+                        </td>
+                    <td>
+                        <a asp-controller ="company" asp-action="vacansdetail" asp-route-id="@item.Vacans.Id" class="text-decoration-none" target="_blank">
+                            @item.Vacans.Company.Email
+                        </a>
+                    </td>
+                    <td>@(item.Status==OrderStatus.Pending ? "Gözləmədə" : item.Status )</td>
+                 
+                        <td style="
+                        padding: 0;
+        
+                              margin:0;
+                                ">
+                        @if (User.IsInRole(UserRole.business.ToString()))
+                        {
+                            <a asp-controller="myaccount" asp-action="AcceptRequestItem" asp-route-requestId="@request.Id" asp-route-requestItemId="@item.Id" class="btn btn-primary" style="display:inline;padding:0;">Təsdiqlə</a>
+                            <a asp-controller="myaccount" asp-action="RejectedRequestItem" asp-route-requestId="@request.Id" asp-route-requestItemId="@item.Id" class="btn btn-warning" style="display:inline;padding:0;">Imtina et</a>
+                        }
+                        else
+                        {
+                            <a asp-controller="myaccount" asp-action="DeleteRequest" asp-route-requestId="@request.Id" asp-route-requestItemId="@item.Id" class="btn btn-danger" style="display:inline;padding:0;">Sorğunu sil</a>
+                        }
+
+                        </td>
+
+
+                </tr>
+                count++;
+            }
+        }
+    </tbody>
+</table>

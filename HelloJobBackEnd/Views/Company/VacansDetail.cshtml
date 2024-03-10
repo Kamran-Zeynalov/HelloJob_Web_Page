@@ -1,0 +1,429 @@
+﻿@{
+    ViewBag.Title = "Vacans detail page";
+    List<Vacans> related = ViewBag.Related;
+    Dictionary<string, string> setting = ViewBag.Setting;
+    List<Cv> UserCv = ViewBag.Cvs;
+}
+@if (TempData["Request"] != null)
+{
+    if ((bool)TempData["Request"] == true)
+    {
+        <input type="hidden" id="requestSuccess" />
+    }
+    else
+    {
+        <input type="hidden" id="requestError" />
+
+    }
+}
+@if (TempData["Register"] != null)
+{
+    if ((bool)TempData["Register"] == true)
+    {
+        <input type="hidden" id="registerSuccess" />
+    }
+    else
+    {
+        <input type="hidden" id="registerError" />
+
+    }
+}
+@if (TempData["Login"] != null)
+{
+    if ((bool)TempData["Login"] == true)
+    {
+        <input type="hidden" id="loginSuccess" />
+    }
+    else
+    {
+        <input type="hidden" id="loginError" />
+
+    }
+}
+@model Vacans
+
+      <section id="titles_and_bgblue">
+        <div class="blueback"></div>
+        <div class="container">
+          <div class="row">
+            <div class="titles col-lg-12 col-md-12">
+              <ul>
+                <li>
+                  <a asp-controller="home" asp-action="index">İş elanları</a>
+                </li>
+                <li>
+                  <a asp-controller="cvpage" asp-action="index">CV-lər</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="vacansdetail">
+        <div class="breadcrumbs-block">
+          <div class="container">
+            <ul class="breadcrumbs">
+              <li>
+                <a asp-controller="home" asp-action="index">Ana Səhifə</a>
+              </li>
+              <li>/</li>
+              <li>
+                <a >@Model.Position</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-6">
+              <div class="right_side">
+                <div class="vacancies">
+                  <div class="vacancies__href">
+                            <a asp-controller="company" asp-action="vacansdetail" asp-route-id="@Model.Id">
+                                <div class="item_left">
+                                    <div class="icon" style="
+                         width: 58px !important;height:auto !important">
+                                        <img style="
+                                 width: 100%;
+                                 object-fit: contain;
+                                  " src="~/assets/images/BusinessTitle/@Model.BusinessArea.BusinessTitle.Image"
+                                             alt="@Model.Company.Name" />
+                                    </div>
+                                    <div class="title">
+                                        <h3>@Model.Position</h3>
+                                        <p>@Model.Company.Name</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="item_right">
+                                <span class="salary">@(Model.Salary == 0 ? "Ə-h razılaşma ilə" : Model.Salary) (AZN)</span>
+                                <span class="date">@Model.CreatedAt.ToString("dd.MM")</span>
+                                <span class="like">
+                                    <a class="like-button" data-item-id="@Model.Id" data-item-type="Vacans">
+                                        <i class="fa-regular fa-heart unliked"></i>
+                                    </a>
+                                    <a class="unliked-button" data-item-id="@Model.Id" data-item-type="Vacans">
+                                        <i class="fa-solid fa-heart liked @(Model.WishListItems.Any(w => w.WishList.User.UserName == User.Identity.Name && w.IsLiked == true) ? "hidden" : "")"></i>
+                                    </a>
+
+                                </span>
+                            </div>
+                  </div>
+                </div>
+                <div class="vacans_block">
+                  <h3 class="infos">İş məlumatlar</h3>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="item mb-0">
+                        <div class="icon">
+                          <img src="~/assets/images/@setting["CityIcon"]"
+                            alt=""
+                          />
+                        </div>
+                        <div class="text">
+                          <h4>@Model.City.Name</h4>
+                          <p>Şəhər</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="item mb-0">
+                        <div class="icon">
+                                        <img src="~/assets/images/@setting["ExperienceIcon"]"
+                                             alt="" />
+                        </div>
+                        <div class="text">
+                          <h4>@Model.Experience.Name</h4>
+                          <p>İş təcrübəsi</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="item">
+                        <div class="icon">
+                                        <img src="~/assets/images/@setting["UserOperatingModeIcon"]"
+                                             alt="" />
+                        </div>
+                        <div class="text">
+                          <h4>@Model.OperatingMode.Name</h4>
+                          <p>İş rejimi</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="item mb-0">
+                        <div class="icon">
+                                        <img src="~/assets/images/@setting["UserOperatingModeIcon"]"
+                                             alt="" />
+                        </div>
+                        <div class="text">
+                                        <h4>İş sahəsi</h4>
+                          <p>@Model.BusinessArea.BusinessTitle.Name</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="item mb-0">
+                        <div class="icon">
+                                        <img src="~/assets/images/@setting["EducationIcon"]"
+                                             alt="" />
+                        </div>
+                        <div class="text">
+                          <h4>@Model.Education.Name</h4>
+                          <p>Təhsil</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="item mb-0">
+                        <div class="icon">
+                                        <img src="~/assets/images/@setting["SalaryIcon"]"
+                                             alt="" />
+                        </div>
+                        <div class="text">
+                                        <h4>@(Model.Salary == 0 ? "Ə-h razılaşma ilə" : Model.Salary) (AZN)</h4>
+                          <p>Əmək Haqqı(Azn)</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="item mb-0">
+                        <div class="icon">
+                                        <img src="~/assets/images/@setting["FolderIcon"]"
+                                             alt="" />
+                        </div>
+                        <div class="d-flex justify-content-between w-100">
+                          <div class="text">
+                                            <h4>Sürücülük vəsiqəsi</h4>
+                            <p>@(Model.DrivingLicense==true ? "Şərtdir" : "Şərt deyil")</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="vacans_block">
+                  <h3 class="infos">İş Barədə Məlumat</h3>
+                  <ul>
+                    @foreach (InfoWork info in Model.InfoWorks)
+                            {
+                                <li>
+                                    @info.Info
+                                </li>
+                            }
+                 
+                  </ul>
+                </div>
+                <div class="vacans_block">
+                  <h3 class="infos">Namizəd üçün tələblər</h3>
+                  <ul>
+                   @foreach (InfoEmployeer info in Model.infoEmployeers)
+                            {
+                                <li>
+                                   @info.Info
+                                </li>
+                            }
+                 
+                  </ul>
+                </div>
+                   
+                        <div class="request">
+                            <form asp-controller="Company" asp-action="VAcansDetail" asp-route-id="@Model.Id" method="post">
+                                <div class="button">
+                                @if (User.Identity.IsAuthenticated && (User.IsInRole(UserRole.employeer.ToString())))
+                                {
+                                    if (UserCv.Any())
+                                    {
+                                        <div class="vacans_block">
+
+                                            <h3 class="infos">Cv-nizi Seçin</h3>
+                                            <select name="cvsID" class="form-control" style="box-shadow:none">
+                                                @foreach (var cv in UserCv)
+                                                {
+                                                    <option value="@cv.Id">@cv.Email - @cv.CreatedAt.ToString("dd.MMMM.yyyy")</option>
+                                                }
+                                            </select>
+                                            <span class="text-danger"></span>
+
+                                        </div>
+                                        <button type="submit" class="req_btn">Müraciət et</button>
+                                    }
+                                    else
+                                    {
+                                        <div class="alert alert-info" role="alert">
+                                            Müraciət etmək üçün zəhmət olmasa <strong>"Cv Yerləşdirdən"</strong>  <strong>"Cv-nizi"</strong> yerləşdirin.!
+                                        </div>
+                                    }
+
+                                     
+                                }
+                                else
+                                {
+                                    <div class="alert alert-info" role="alert">
+                                        Vakansiya-ya Müraciət etmək üçün zəhmət olmasa <strong>"işçi"</strong> kimi qeydiiyatdan keçin və ya  <strong>"işçi"</strong> hesabınız varsa  giriş edin
+                                    </div>
+                                }
+
+                                </div>
+                            </form>
+                    
+                        </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-3">
+              <div class="user_contact">
+                <div class="company_body_detail">
+                  <div class="contact_body">
+                    <div class="stick">
+                      <div class="title">
+                        <h4>Elan №@Model.Id</h4>
+                      </div>
+                      <div class="infos">
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <div class="item">
+                              <div class="icon d-flex">
+                                <div class="all d-flex">
+                                  <div class="image">
+                                                            <img src="~/assets/images/@setting["CalendarIcon"]"
+                                                                 alt="" />
+                                  </div>
+                                  <div class="text">
+                                    <h4 class="secrets-title">@Model.CreatedAt.ToString("dd.MM")</h4>
+                                    <p>Elan Tarixi</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="item">
+                              <div class="icon d-flex">
+                                <div class="all d-flex">
+                                  <div class="image">
+                                                            <img src="~/assets/images/@setting["CalendarIcon"]"
+                                                                 alt="" />
+                                  </div>
+                                  <div class="text">
+                                    <h4 class="secrets-title">@Model.EndedAt.ToString("dd.MM")</h4>
+                                    <p>Bitme Tarixi</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="item">
+                              <div class="icon d-flex justify-content-between">
+                                <div class="all d-flex">
+                                  <div class="image">
+                                                            <img src="~/assets/images/@setting["EyeIcon"]"
+                                                                 alt="" />
+                                  </div>
+                                  <div class="text">
+                                    <h4 class="secrets-title">@Model.Count</h4>
+                                    <p>Baxildi</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="related">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-8">
+              <div class="title">
+                <h1>Oxşar Vkansiyalar</h1>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="row">
+                   @foreach (Vacans vacans in related)
+                        {
+                            <div class="col-lg-6">
+                                <div class="vacancies">
+                                    <div class="vacancies__href">
+                                        <a asp-controller="company" asp-action="vacansdetail" asp-route-id="@vacans.Id">
+                                            <div class="item_left">
+                                                <div class="icon" style="
+                         width: 58px !important;height:auto !important">
+                                                    <img style="
+                                 width: 100%;
+                                 object-fit: contain;
+                                  " src="~/assets/images/BusinessTitle/@vacans.BusinessArea.BusinessTitle.Image"
+                                                         alt="@vacans.Company.Name" />
+                                                </div>
+                                                <div class="title">
+                                                    <h3>@vacans.Position</h3>
+                                                    <p>@vacans.Company.Name</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="item_right">
+                                            <span class="salary">@(vacans.Salary == 0 ? "Ə-h razılaşma ilə" : vacans.Salary) (AZN)</span>
+                                            <span class="date">@vacans.CreatedAt.ToString("dd.MM")</span>
+                                            <span class="like">
+                                                <a class="like-button" data-item-id="@vacans.Id" data-item-type="Vacans">
+                                                    <i class="fa-regular fa-heart unliked"></i>
+                                                </a>
+                                                <a class="unliked-button" data-item-id="@vacans.Id" data-item-type="Vacans">
+                                                    <i class="fa-solid fa-heart liked @(vacans.WishListItems.Any(w => w.WishList.User.UserName == User.Identity.Name && w.IsLiked == true) ? "hidden" : "")"></i>
+                                                </a>
+
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+@section Script{
+<script>
+    $(document).ready(function () {
+            if ($("#requestSuccess").length) {
+                toastr["success"]("Sizin sorğunuz uğurla göndərildi", "Uğurlu əməliyyat!")
+        }
+            else if ($("#requestError").length) {
+                toastr["error"]("Xəta baş verdi!", "Bu Cv ilə vakansiyaya sorğu göndərmisiniz..")
+        }
+    })
+</script>
+    <script>
+        $(document).ready(function () {
+            if ($("#registerSuccess").length) {
+                toastr["success"]("Uğurlu əməliyyət!", "Salam.Zəhmət olmasa e-poçtuvuzu yoxlayın")
+            }
+            else if ($("#registerError").length) {
+                toastr["error"]("Xəta baş verdi!", "Yenidən yoxlayın...")
+            }
+        })
+    </script>
+    <script>
+        $(document).ready(function () {
+            if ($("#loginSuccess").length) {
+                toastr["success"]("Sizi yenidən görmək xoşdur!", "Salam")
+            }
+            else if ($("#loginError").length) {
+                toastr["error"]("İstifadəçi adı və ya Parol səhfdir!", "Bağışlayın...")
+            }
+        })
+    </script>
+}

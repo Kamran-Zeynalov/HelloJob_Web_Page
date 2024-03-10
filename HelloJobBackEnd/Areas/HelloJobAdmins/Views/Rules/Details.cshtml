@@ -1,0 +1,30 @@
+﻿@model HelloJobBackEnd.Entities.Rules
+
+<div>
+    <h4>Rules</h4>
+    <hr />
+    <dl class="row m-3">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CV)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CV)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Vacans)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Vacans)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Rule)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Rule)
+        </dd>
+    </dl>
+</div>
+<div class="m-3">
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="class=" btn waves-effect waves-light btn-warning btn-outline-warning"">Edit</a>
+    <a asp-action="Index" class="btn waves-effect waves-light btn-inverse">Back to List</a>
+</div>

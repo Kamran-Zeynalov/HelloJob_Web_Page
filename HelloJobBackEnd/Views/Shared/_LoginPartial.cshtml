@@ -1,0 +1,42 @@
+﻿@model LoginVM
+
+<div class="login">
+    <form asp-controller="Account" asp-action="Login">
+        <div class="inputs_lg form-group">
+            <label asp-for="UserName"></label>
+            <input asp-for="UserName" placeholder="E-poçtunuzu yazın" required>
+            <span asp-validation-for="UserName"></span>
+
+        </div>
+        <div class="inputs_lg form-group">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" placeholder="********" required>
+            <span asp-validation-for="Password"></span>
+        </div>
+        <div class="log_foot">
+            <div class="rememberme form-group">
+                <input asp-for="RememberMe">
+                <span>Yadda saxla</span>
+            </div>
+            <a class="regs_bopup_open" style="cursor: pointer;">Şifrəni unutmuşam</a>
+
+        </div>
+        <div class="buttons_sbmt">
+            <div class="login_submit">
+                <button type="submit">Daxil ol</button>
+            </div>
+            <div class="goRegister">
+                <button type="button">Qeydiyyatdan keç</button>
+            </div>
+            <div class="gogmail">
+                <a class="w-100" asp-controller ="Account" asp-action="RegisterWithGoogle" asp-route-returnUrl="@Context.Request.Path"> <i class="bi bi-google"></i> E-poçt ilə Giriş et</a>
+            </div>
+            <div class="gofb">
+                <a asp-controller ="Account" asp-action="RegisterWithFacebook" asp-route-returnUrl="@Context.Request.Path"> <i class="bi bi-facebook"></i> Facebook ilə Giriş et</a>
+            </div>
+            <div class="alert alert-light" role="alert">
+                Əgər vakansiya yerləşdirmək istəyirsinizsə,sayt daxilində "Qeydiyyat" zamanı "Kateqoriya" olaraq "Şirkət seçin"!.
+            </div>
+        </div>
+    </form>
+</div>

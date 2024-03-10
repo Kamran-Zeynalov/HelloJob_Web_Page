@@ -1,0 +1,638 @@
+﻿@{
+    Layout = "_MyAccount";
+}
+@model VacansVM
+<div class="account">
+    <div class="account_bar">
+        <a asp-controller="myaccount" asp-action="index" class="logo" aria-label="hellojob">
+            <img src="~/assets/images/night_mode_logo.svg" alt="" />
+        </a>
+        <ul class="myprofile">
+
+            <li>
+                <a asp-controller="myaccount" asp-action="index">
+                    <span>
+                        <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/user2.svg"
+                             alt="" />
+                    </span>
+                    Profilim
+                </a>
+            </li>
+            <li>
+                <a asp-controller="myaccount" asp-action="myrequest">
+                    <span>
+                        <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/megaphone.svg"
+                             alt="" />
+                    </span>
+                    Müraciətlər
+                </a>
+            </li>
+            <li>
+                <a asp-controller="myaccount" asp-action="myorder">
+                    <span>
+                        <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/megaphone.svg"
+                             alt="" />
+                    </span>
+                    Gözləmədə olan elanlar
+                </a>
+            </li>
+            <li>
+                <a asp-controller="myaccount" asp-action="mysticker">
+                    <span>
+                        <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/megaphone.svg"
+                             alt="" />
+                    </span>
+                    Elanlarım
+                </a>
+            </li>
+            <li>
+                <a asp-controller="myaccount" asp-action="wishlistpage">
+                    <span>
+                        <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/heart2.svg"
+                             alt="" />
+                    </span>
+                    Bəyəndiklərim
+                </a>
+            </li>
+            <li>
+                <a asp-controller="myaccount" asp-action="security">
+                    <span>
+                        <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/shield.svg"
+                             alt="" />
+                    </span>
+                    Təhlükəsizlik
+                </a>
+            </li>
+            @if (User.IsInRole(UserRole.business.ToString()))
+            {
+                <li>
+                    <a class="active" asp-controller="myaccount" asp-action="createvacans">
+                        <span>
+                            <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/shield.svg"
+                                 alt="" />
+                        </span>
+                        Vakansiya Yerləşdir
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="myaccount" asp-action="creatingcompany">
+                        <span>
+                            <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/shield.svg"
+                                 alt="" />
+                        </span>
+                        Şirkət Yarat
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="myaccount" asp-action="mycompany">
+                        <span>
+                            <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/cv.svg"
+                                 alt="" />
+                        </span>
+                        Şirkətlərim
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a class="active" asp-controller="myaccount" asp-action="createcv">
+                        <span>
+                            <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/cv.svg"
+                                 alt="" />
+                        </span>
+                        Cv yerləşdir
+                    </a>
+                </li>
+            }
+
+        </ul>
+        <div class="backsite">
+            <a asp-controller="home" asp-action="index"
+               class="btn btn-site btn-transparent d-md-none">Sayta keçid et</a>
+        </div>
+    </div>
+    <div class="account_content">
+        <div class="account_head">
+            <div class="account_head_tools">
+                <a asp-controller="home" asp-action="index"
+                   class="btn btn-site btn-transparent d-none d-md-block">Sayta keçid et</a>
+                <div class="account_head_user">
+                    <a href="./account.html" class="profile__header__user__name">
+                        <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/user.svg"
+                             alt="" />
+                        <span>@ViewBag.User.FullName</span>
+                    </a>
+                    <ul class="account_head_user_drop">
+                        <li><a asp-controller="myaccount" asp-action="mysticker">Mənim elanlarım</a></li>
+                        <li>
+                            <a asp-controller="myaccount" asp-action="security">Şəxsi məlumatlar</a>
+                        </li>
+                        <li><a asp-controller="account" asp-action="logout">Çıxış</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="create_vacans">
+            <div class="title">
+                <h1>Vakansiya Yerləşdir</h1>
+                <ul class="profile__add-vacans__parts">
+                    <li class="active">
+                        <a href="#tab1" class=" step_btn">İş barədə məlumatlar</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="inner_tab">
+                <form asp-controller="myaccount" asp-action="Createvacans" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row mb-5">
+                        <div class="col-lg-2">
+                            <h2 class="section_title">İş barədə məlumatlar</h2>
+                        </div>
+                        <div class="col-lg-10">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="vacans_inputs">
+                                     
+                                        <label asp-for="CompanyId">Şirkət adı</label>
+                                        <select asp-for="CompanyId" asp-items="@(new SelectList(ViewBag.Company,"Id","Name"))" class="form-control cities">
+                                            <option selected disabled>Şirkətinizi Seçin</option>
+
+
+                                        </select>
+                                        <span asp-validation-for="CompanyId" class="text-danger"></span>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="vacans_inputs">
+                                        <label asp-for="EducationId">Təhsil tələbi</label>
+                                        <select asp-for="EducationId" asp-items="@(new SelectList(ViewBag.Education,"Id","Name"))" class="form-control cities">
+
+                                        </select>
+                                        <span asp-validation-for="EducationId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="vacans_inputs">
+                                        <label asp-for="CityId">Şəhər</label>
+                                        <select asp-for=CityId asp-items="@(new SelectList(ViewBag.Cities,"Id","Name"))" class="form-control cities">
+                                        </select>
+                                        <span asp-validation-for="CityId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="vacans_inputs">
+                                        <label asp-for="Position">Vəzifə</label>
+                                        <input asp-for="Position"
+                                               class="form-control inputs"
+                                               placeholder="Vəzifə" />
+                                        <span asp-validation-for="Position" class="text-danger"></span>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="vacans_inputs">
+                                        <label asp-for="BusinessAreaId">Kateqoriya</label>
+                                        <select asp-for=BusinessAreaId class="form-control cities">
+                                            @foreach (var businessTitle in ViewBag.Business)
+                                            {
+                                                <optgroup label="@businessTitle.Name">
+                                                    @foreach (var businessArea in businessTitle.BusinessAreas)
+                                                    {
+                                                        <option value="@businessArea.Id">@businessArea.Name</option>
+                                                    }
+                                                </optgroup>
+                                            }
+                                        </select>
+                                        <span asp-validation-for="BusinessAreaId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="vacans_inputs">
+                                        <label asp-for="ExperienceId">İş stajı</label>
+                                        <select asp-for="ExperienceId" asp-items="@(new SelectList(ViewBag.Experince,"Id","Name"))" class="form-control cities">
+
+                                        </select>
+                                        <span asp-validation-for="ExperienceId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="vacans_inputs">
+                                        <label asp-for="OperatingModeId">İş saatı</label>
+                                        <select asp-for="OperatingModeId" asp-items="@(new SelectList(ViewBag.Mode,"Id","Name"))" class="form-control cities">
+
+                                        </select>
+                                        <span asp-validation-for="OperatingModeId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="vacans_inputs">
+                                        <label asp-for="Salary">Əmək haqqı AZN(Məs:1500)</label>
+                                        <input asp-for="Salary"
+                                               max="12000"
+                                               value="0"
+                                               class="form-control inputs"
+                                                />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="vacans_inputs">
+                                        <label asp-for="DrivingLicense">Sürücülük vəsiqəsi</label>
+                                        <div class="checkbox">
+                                            <input asp-for="DrivingLicense" class="form-check-input mt-0">
+                                            <span>Şərtdir</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-lg-2">
+                            <h2 class="section_title">İş barədə əlavə məlumatlar</h2>
+                        </div>
+                        <div class="col-lg-10">
+                            <div class="adding work_add">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="vacans_inputs">
+                                            <input type="text"
+                                                   class="form-control inputs add_input"
+                                                   placeholder="İş barədə əlavə məlumatlar yazın" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="plus_minus_btn">
+                                            <button class="plus_btn work_pls"><i class="bi bi-patch-plus-fill"></i></button>
+                                            <button class="minus_btn work_mns"><i class="bi bi-patch-minus-fill"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="vacans_inputs">
+                                            <input asp-for="InfoWorks"
+                                                   class="form-control inputs hidden_work w-100"
+                                                   readonly />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-lg-2">
+                            <h2 class="section_title">Namizəddən üçün tələblər</h2>
+                        </div>
+                        <div class="col-lg-10">
+                            <div class="adding user_add">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="vacans_inputs">
+                                            <input type="text"
+                                                   class="form-control inputs add_input_user"
+                                                   placeholder="Namizəddən üçün tələblər yazın" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="plus_minus_btn">
+                                            <button class="plus_btn user_pls"><i class="bi bi-patch-plus-fill"></i></button>
+                                            <button class="minus_btn user_mns"><i class="bi bi-patch-minus-fill"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="vacans_inputs">
+                                            <input asp-for="infoEmployeers"
+                                                   class="form-control inputs hidden_user w-100"
+                                                   readonly />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="submit-button">
+                        <button type="submit" class="btn btn-primary submit">Təsdiq et</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mobile_account d-md-none d-lg-none">
+    <div class="head ">
+        <div class="hamburgers icons">
+            <i class="bi bi-list"></i>
+        </div>
+        <div class="logo">
+            <div class="image">
+                <img src="~/assets/images/night_mode_logo.svg" alt="" />
+            </div>
+        </div>
+        <div class="person icons">
+            <i class="bi bi-person-fill person_icon"></i>
+        </div>
+    </div>
+    <div class="body">
+        <div class="persons_menu">
+            <div class="account_head_user">
+                <ul>
+                    <li><a asp-controller="myaccount" asp-action="index">@ViewBag.User.FullName</a></li>
+                    <li><a asp-controller="myaccount" asp-action="mysticker">Mənim elanlarım</a></li>
+                    <li>
+                        <a asp-controller="myaccount" asp-action="security">Şəxsi məlumatlar</a>
+                    </li>
+                    <li><a asp-controller="account" asp-action="logout">Çıxış</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="hamburgers_menu">
+            <ul class="myprofile">
+                <li>
+                    <a asp-controller="myaccount" asp-action="index">
+                        <span>
+                            <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/user2.svg"
+                                 alt="" />
+                        </span>
+                        Profilim
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="myaccount" asp-action="myrequest">
+                        <span>
+                            <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/megaphone.svg"
+                                 alt="" />
+                        </span>
+                        Müraciətlər
+                    </a>
+                </li>
+                @if (User.IsInRole(UserRole.business.ToString()))
+                {
+                    <li>
+                        <a class="active" asp-controller="myaccount" asp-action="createvacans">
+                            <span>
+                                <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/cv.svg"
+                                     alt="" />
+                            </span>
+                            Vakansiya yerləşdir
+                        </a>
+                    </li>
+                    <li>
+                        <a  asp-controller="myaccount" asp-action="creatingcompany">
+                            <span>
+                                <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/cv.svg"
+                                     alt="" />
+                            </span>
+                            Şirkət Yarat
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="myaccount" asp-action="mycompany">
+                            <span>
+                                <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/cv.svg"
+                                     alt="" />
+                            </span>
+                            Şirkətlərim
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <a  asp-controller="myaccount" asp-action="createcv">
+                            <span>
+                                <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/cv.svg"
+                                     alt="" />
+                            </span>
+                            Cv yerləşdir
+                        </a>
+                    </li>
+                }
+                <li>
+                    <a asp-controller="myaccount" asp-action="myorder">
+                        <span>
+                            <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/megaphone.svg"
+                                 alt="" />
+                        </span>
+                        Gözləmədə olan elanlar
+                    </a>
+                </li>
+                <li>
+                    <a  asp-controller="myaccount" asp-action="mysticker">
+                        <span>
+                            <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/megaphone.svg"
+                                 alt="" />
+                        </span>
+                        Elanlarım
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="myaccount" asp-action="wishlistpage">
+                        <span>
+                            <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/heart2.svg"
+                                 alt="" />
+                        </span>
+                        Bəyəndiklərim
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="myaccount" asp-action="security">
+                        <span>
+                            <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/shield.svg"
+                                 alt="" />
+                        </span>
+                        Təhlükəsizlik
+                    </a>
+                </li>
+            </ul>
+            <div class="backsite">
+                <a asp-controller="Home" asp-action="index"
+                   class="btn btn-site btn-transparent d-md-none">Sayta keçid et</a>
+            </div>
+        </div>
+        <div class="account_content">
+            <div class="create_vacans">
+                <div class="title">
+                    <h1>Vakansiya Yerləşdir</h1>
+                    <ul class="profile__add-vacans__parts">
+                        <li class="active">
+                            <a href="#tab1" class=" step_btn">İş barədə məlumatlar</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="inner_tab">
+                    <form asp-controller="myaccount" asp-action="Createvacans" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="row mb-5">
+                            <div class="col-lg-2">
+                                <h2 class="section_title">İş barədə məlumatlar</h2>
+                            </div>
+                            <div class="col-lg-10">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="vacans_inputs">
+
+                                            <label asp-for="CompanyId">Şirkət adı</label>
+                                            <select asp-for="CompanyId" asp-items="@(new SelectList(ViewBag.Company,"Id","Name"))" class="form-control cities">
+                                                <option selected disabled>Şirkətinizi Seçin</option>
+
+
+                                            </select>
+                                            <span asp-validation-for="CompanyId" class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="vacans_inputs">
+                                            <label asp-for="EducationId">Təhsil tələbi</label>
+                                            <select asp-for="EducationId" asp-items="@(new SelectList(ViewBag.Education,"Id","Name"))" class="form-control cities">
+                                            </select>
+                                            <span asp-validation-for="EducationId" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="vacans_inputs">
+                                            <label asp-for="CityId">Şəhər</label>
+                                            <select asp-for=CityId asp-items="@(new SelectList(ViewBag.Cities,"Id","Name"))" class="form-control cities">
+                                            </select>
+                                            <span asp-validation-for="CityId" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="vacans_inputs">
+                                            <label asp-for="Position">Vəzifə</label>
+                                            <input asp-for="Position"
+                                                   class="form-control inputs"
+                                                   placeholder="Vəzifə" />
+                                            <span asp-validation-for="Position" class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="vacans_inputs">
+                                            <label asp-for="BusinessAreaId">Kateqoriya</label>
+                                            <select asp-for=BusinessAreaId class="form-control cities">
+                                                @foreach (var businessTitle in ViewBag.Business)
+                                                {
+                                                    <optgroup label="@businessTitle.Name">
+                                                        @foreach (var businessArea in businessTitle.BusinessAreas)
+                                                        {
+                                                            <option value="@businessArea.Id">@businessArea.Name</option>
+                                                        }
+                                                    </optgroup>
+                                                }
+                                            </select>
+                                            <span asp-validation-for="BusinessAreaId" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="vacans_inputs">
+                                            <label asp-for="ExperienceId">İş stajı</label>
+                                            <select asp-for="ExperienceId" asp-items="@(new SelectList(ViewBag.Experince,"Id","Name"))" class="form-control cities">
+                                            </select>
+                                            <span asp-validation-for="ExperienceId" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="vacans_inputs">
+                                            <label asp-for="OperatingModeId">İş saatı</label>
+                                            <select asp-for="OperatingModeId" asp-items="@(new SelectList(ViewBag.Mode,"Id","Name"))" class="form-control cities">
+                                            </select>
+                                            <span asp-validation-for="OperatingModeId" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="vacans_inputs">
+                                            <label asp-for="Salary">Əmək haqqı AZN(Məs:1500)</label>
+                                            <input asp-for="Salary"
+                                                   max="12000"
+                                                   value="0"
+                                                   class="form-control inputs" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="vacans_inputs">
+                                            <label asp-for="DrivingLicense">Sürücülük vəsiqəsi</label>
+                                            <div class="checkbox">
+                                                <input asp-for="DrivingLicense" class="form-check-input mt-0">
+                                                <span>Şərtdir</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-5">
+                            <div class="col-lg-2">
+                                <h2 class="section_title">İş barədə əlavə məlumatlar</h2>
+                            </div>
+                            <div class="col-lg-10">
+                                <div class="adding work_add">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="vacans_inputs">
+                                                <input type="text"
+                                                       class="form-control inputs add_input"
+                                                       placeholder="İş barədə əlavə məlumatlar yazın" />
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="plus_minus_btn">
+                                                <button class="plus_btn work_pls"><i class="bi bi-patch-plus-fill"></i></button>
+                                                <button class="minus_btn work_mns"><i class="bi bi-patch-minus-fill"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="vacans_inputs">
+                                                <input asp-for="InfoWorks"
+                                                       class="form-control inputs hidden_work w-100"
+                                                       readonly />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-5">
+                            <div class="col-lg-2">
+                                <h2 class="section_title">Namizəddən üçün tələblər</h2>
+                            </div>
+                            <div class="col-lg-10">
+                                <div class="adding user_add">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="vacans_inputs">
+                                                <input type="text"
+                                                       class="form-control inputs add_input_user"
+                                                       placeholder="Namizəddən üçün tələblər yazın" />
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="plus_minus_btn">
+                                                <button class="plus_btn user_pls"><i class="bi bi-patch-plus-fill"></i></button>
+                                                <button class="minus_btn user_mns"><i class="bi bi-patch-minus-fill"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="vacans_inputs">
+                                                <input asp-for="infoEmployeers"
+                                                       class="form-control inputs hidden_user w-100"
+                                                       readonly />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="submit-button">
+                            <button type="submit" class="btn btn-primary submit">Təsdiq et</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/assets/js/postvacans.js"></script>
+
+}

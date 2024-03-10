@@ -1,0 +1,395 @@
+﻿@{
+    Layout = "_MyAccount";
+
+}
+
+
+@model ProfileVM
+<div class="account">
+    <div class="account_bar">
+        <a asp-controller="myaccount" asp-action="index" class="logo" aria-label="hellojob">
+            <img src="~/assets/images/night_mode_logo.svg" alt="" />
+        </a>
+        <ul class="myprofile">
+
+            <li>
+                <a asp-controller="myaccount" asp-action="index">
+                    <span>
+                        <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/user2.svg"
+                             alt="" />
+                    </span>
+                    Profilim
+                </a>
+            </li>
+            <li>
+                <a asp-controller="myaccount" asp-action="myrequest">
+                    <span>
+                        <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/megaphone.svg"
+                             alt="" />
+                    </span>
+                    Müraciətlər
+                </a>
+            </li>
+            <li>
+                <a asp-controller="myaccount" asp-action="myorder">
+                    <span>
+                        <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/megaphone.svg"
+                             alt="" />
+                    </span>
+                    Gözləmədə olan elanlar
+                </a>
+            </li>
+            <li>
+                <a asp-controller="myaccount" asp-action="mysticker">
+                    <span>
+                        <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/megaphone.svg"
+                             alt="" />
+                    </span>
+                    Elanlarım
+                </a>
+            </li>
+            <li>
+                <a asp-controller="myaccount" asp-action="wishlistpage">
+                    <span>
+                        <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/heart2.svg"
+                             alt="" />
+                    </span>
+                    Bəyəndiklərim
+                </a>
+            </li>
+            <li>
+                <a class="active" asp-controller="myaccount" asp-action="security">
+                    <span>
+                        <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/shield.svg"
+                             alt="" />
+                    </span>
+                    Təhlükəsizlik
+                </a>
+            </li>
+            @if (User.IsInRole(UserRole.business.ToString()))
+            {
+                <li>
+                    <a asp-controller="myaccount" asp-action="createvacans">
+                        <span>
+                            <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/shield.svg"
+                                 alt="" />
+                        </span>
+                        Vakansiya Yerləşdir
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="myaccount" asp-action="creatingcompany">
+                        <span>
+                            <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/shield.svg"
+                                 alt="" />
+                        </span>
+                        Şirkət Yarat
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="myaccount" asp-action="mycompany">
+                        <span>
+                            <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/cv.svg"
+                                 alt="" />
+                        </span>
+                        Şirkətlərim
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a asp-controller="myaccount" asp-action="createcv">
+                        <span>
+                            <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/cv.svg"
+                                 alt="" />
+                        </span>
+                        Cv yerləşdir
+                    </a>
+                </li>
+            }
+
+        </ul>
+        <div class="backsite">
+            <a asp-controller="home" asp-action="index"
+               class="btn btn-site btn-transparent d-md-none">Sayta keçid et</a>
+        </div>
+    </div>
+    <div class="account_content">
+        <div class="account_head">
+            <div class="account_head_tools">
+                <a asp-controller="home" asp-action="index"
+                   class="btn btn-site btn-transparent d-none d-md-block">Sayta keçid et</a>
+                <div class="account_head_user">
+                    <a href="./account.html" class="profile__header__user__name">
+                        <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/user.svg"
+                             alt="" />
+                        <span>@ViewBag.User.FullName</span>
+                    </a>
+                    <ul class="account_head_user_drop">
+                        <li><a asp-controller="myaccount" asp-action="mysticker">Mənim elanlarım</a></li>
+                        <li>
+                            <a asp-action="myaccount" asp-action="security">Şəxsi məlumatlar</a>
+                        </li>
+                        <li><a asp-controller="account" asp-action="logout">Çıxış</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="security">
+            <div class="title">
+                <h1>Təhlükəsizlik</h1>
+            </div>
+            <div class="security_tab">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="allsecurity">
+                            <form asp-controller="myaccount" asp-action="security">
+                                <div class="security-inputs">
+                                    <label asp-for="Email">E-poçt</label>
+                                    <input asp-for="Email"
+                                           class="form-control inputs"
+                                           placeholder="@ViewBag.User.Email"
+                                           disabled />
+                                </div>
+                                <div class="security-inputs">
+                                    <label asp-for="UserName">İstifadəçi</label>
+                                    <input asp-for="UserName"
+                                           class="form-control inputs"
+                                           placeholder="@ViewBag.User.UserName" />
+                                </div>
+                                <div class="security-inputs">
+                                    <label asp-for="CurrentPassword">Mövcud Şifrəni Daxil Edin</label>
+                                    <input asp-for="CurrentPassword"
+                                           class="form-control inputs"
+                                           placeholder="********" />
+                                </div>
+                                <div class="security-inputs">
+                                    <label asp-for="NewPassword">Yeni Şifrə</label>
+                                    <input asp-for="NewPassword"
+                                           class="form-control inputs"
+                                           placeholder="********" />
+                                </div>
+                                <div class="security-inputs">
+                                    <label asp-for="ConfirmNewPassword">Şifrənin təsdiqi</label>
+                                    <input asp-for="ConfirmNewPassword"
+                                           class="form-control inputs"
+                                           placeholder="********" />
+                                </div>
+                                <div class="save_button mb-0">
+                                    <button class="btn btn-submit submit" type="submit">Yeniləmək</button>
+                                </div>
+                            </form>
+                            <div class="mt-3">
+                                <form id="deleteUserForm" asp-controller="myaccount" asp-action="DeleteUserData" method="post">
+                                    <input type="hidden" name="userId" value="@ViewBag.User.Id" />
+                                    <button type="submit" class="btn btn-danger" onclick="return confirmDelete()">Kullanıcıyı Sil</button>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mobile_account d-md-none d-lg-none">
+    <div class="head">
+        <div class="hamburgers icons">
+            <i class="bi bi-list"></i>
+        </div>
+        <div class="logo">
+            <div class="image">
+                <img src="~/assets/images/night_mode_logo.svg" alt="" />
+            </div>
+        </div>
+        <div class="person icons">
+            <i class="bi bi-person-fill person_icon"></i>
+        </div>
+    </div>
+    <div class="body">
+        <div class="persons_menu">
+            <div class="account_head_user">
+                <ul>
+                    <li><a asp-controller="myaccount" asp-action="index">@ViewBag.User.FullName</a></li>
+                    <li><a asp-controller="myaccount" asp-action="mysticker">Mənim elanlarım</a></li>
+                    <li>
+                        <a asp-controller="myaccount" asp-action="security">Şəxsi məlumatlar</a>
+                    </li>
+                    <li><a asp-controller="account" asp-action="logout">Çıxış</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="hamburgers_menu">
+            <ul class="myprofile">
+                <li>
+                    <a asp-controller="myaccount" asp-action="index">
+                        <span>
+                            <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/user2.svg"
+                                 alt="" />
+                        </span>
+                        Profilim
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="myaccount" asp-action="myrequest">
+                        <span>
+                            <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/megaphone.svg"
+                                 alt="" />
+                        </span>
+                        Müraciətlər
+                    </a>
+                </li>
+                @if (User.IsInRole(UserRole.business.ToString()))
+                {
+                    <li>
+                        <a asp-controller="myaccount" asp-action="createvacans">
+                            <span>
+                                <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/cv.svg"
+                                     alt="" />
+                            </span>
+                            Vakansiya yerləşdir
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="myaccount" asp-action="creatingcompany">
+                            <span>
+                                <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/cv.svg"
+                                     alt="" />
+                            </span>
+                            Şirkət Yarat
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="myaccount" asp-action="mycompany">
+                            <span>
+                                <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/cv.svg"
+                                     alt="" />
+                            </span>
+                            Şirkətlərim
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <a asp-controller="myaccount" asp-action="createcv">
+                            <span>
+                                <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/cv.svg"
+                                     alt="" />
+                            </span>
+                            Cv yerləşdir
+                        </a>
+                    </li>
+                }
+                <li>
+                    <a asp-controller="myaccount" asp-action="myorder">
+                        <span>
+                            <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/megaphone.svg"
+                                 alt="" />
+                        </span>
+                        Gözləmədə olan elanlar
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="myaccount" asp-action="mysticker">
+                        <span>
+                            <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/megaphone.svg"
+                                 alt="" />
+                        </span>
+                        Elanlarım
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="myaccount" asp-action="wishlistpage">
+                        <span>
+                            <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/heart2.svg"
+                                 alt="" />
+                        </span>
+                        Bəyəndiklərim
+                    </a>
+                </li>
+                <li>
+                    <a class="active" asp-controller="myaccount" asp-action="security">
+                        <span>
+                            <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/shield.svg"
+                                 alt="" />
+                        </span>
+                        Təhlükəsizlik
+                    </a>
+                </li>
+            </ul>
+            <div class="backsite">
+                <a asp-controller="Home" asp-action="index"
+                   class="btn btn-site btn-transparent d-md-none">Sayta keçid et</a>
+            </div>
+        </div>
+        <div class="account_content">
+            <div class="security">
+                <div class="title">
+                    <h1>Təhlükəsizlik</h1>
+                </div>
+                <div class="security_tab">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="allsecurity">
+                                <form asp-controller="myaccount" asp-action="security">
+                                    <div class="security-inputs">
+                                        <label asp-for="Email">E-poçt</label>
+                                        <input asp-for="Email"
+                                               class="form-control inputs"
+                                               placeholder="@ViewBag.User.Email"
+                                               disabled />
+                                    </div>
+                                    <div class="security-inputs">
+                                        <label asp-for="UserName">İstifadəçi</label>
+                                        <input asp-for="UserName"
+                                               class="form-control inputs"
+                                               placeholder="@ViewBag.User.UserName" />
+                                    </div>
+                                    <div class="security-inputs">
+                                        <label asp-for="CurrentPassword">Mövcud Şifrəni Daxil Edin</label>
+                                        <input asp-for="CurrentPassword"
+                                               class="form-control inputs"
+                                               placeholder="********" />
+                                    </div>
+                                    <div class="security-inputs">
+                                        <label asp-for="NewPassword">Yeni Şifrə</label>
+                                        <input asp-for="NewPassword"
+                                               class="form-control inputs"
+                                               placeholder="********" />
+                                    </div>
+                                    <div class="security-inputs">
+                                        <label asp-for="ConfirmNewPassword">Şifrənin təsdiqi</label>
+                                        <input asp-for="ConfirmNewPassword"
+                                               class="form-control inputs"
+                                               placeholder="********" />
+                                    </div>
+                                    <div class="save_button mb-0">
+                                        <button class="btn btn-submit submit" type="submit">Yeniləmək</button>
+                                    </div>
+                                </form>
+                                <div class="mt-3">
+                                    <form id="deleteUserForm" asp-controller="myaccount" asp-action="DeleteUserData" method="post">
+                                        <input type="hidden" name="userId" value="@ViewBag.User.Id" />
+                                        <button type="submit" class="btn btn-danger" onclick="return confirmDelete()">Kullanıcıyı Sil</button>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        function confirmDelete() {
+            var confirmation = confirm("Hesabıvızı silməyə əminsiniz?");
+            return confirmation;
+        }
+    </script>
+}

@@ -1,0 +1,64 @@
+﻿@model RegisterVM
+<div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+<div class="register">
+    <form asp-controller="account" asp-action="Register"  >
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+        <div class="inputs_lg form-group">
+            <label asp-for="Firstname"></label>
+            <input asp-for="Firstname" placeholder="Adınızı yazın" required>
+            <span asp-validation-for="Firstname"></span>
+        </div>
+        <div class="inputs_lg form-group">
+            <label asp-for="Lastname"></label>
+            <input asp-for="Lastname" placeholder="Soyadınızı yazın" required>
+            <span asp-validation-for="Lastname"></span>
+        </div>
+        <div class="inputs_lg form-group">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" placeholder="E-poçtunuzu yazın" required>
+            <span asp-validation-for="Email"></span>
+        </div>
+        <div class="inputs_lg form-group">
+            <label asp-for="Username"></label>
+            <input asp-for="Username" placeholder="Istifadeci adi yazın" required>
+            <span asp-validation-for="Username"></span>
+        </div>
+        <div class="inputs_lg form-group">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" placeholder="********">
+            <span asp-validation-for="Password"></span>
+        </div>
+        <div class="inputs_lg form-group">
+            <label asp-for="ConfirmPassword"></label>
+            <input asp-for="ConfirmPassword" placeholder="********" required>
+            <span asp-validation-for="ConfirmPassword"></span>
+        </div>
+
+        <div class="inputs_lg form-group">
+            <label asp-for="userRole">Kateqoriya</label>
+            <select asp-for="userRole" class="form-select role mb-3">
+                <option value="@UserRole.business">Şirkət</option>
+                <option value="@UserRole.employeer">İşçi</option>
+            </select>
+            <span asp-validation-for="userRole"></span>
+        </div>
+        <div class="log_foot">
+            <div class="rememberme form-group">
+                <input asp-for="Terms" required>
+                <span>Qeydiyyatı Təsdiqlə</span>
+                <span asp-validation-for="Terms"></span>
+            </div>
+
+        </div>
+        <div class="buttons_sbmt">
+            <div class="register_submit">
+                <button type="submit">Qeydiyyat ol</button>
+            </div>
+            <div class="goLogin">
+                <button type="button">Giriş səhifəsi</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+

@@ -1,0 +1,19 @@
+﻿@model AccountVM
+
+<div class="forgot">
+    <form asp-controller="Account" asp-action="ForgotPassword">
+        <div class="inputs_lg form-group">
+            <label asp-for="User.Email"> E-Poçt</label>
+               
+            <input asp-for="User.Email" placeholder="E-poçtunuzu yazın" required>
+        </div>
+        <div class="buttons_sbmt">
+            <div class="forgot_submit">
+                <button type="submit">Göndər</button>
+            </div>
+            <div class="goLogin">
+                <button type="button">Giriş səhifəsi</button>
+            </div>
+        </div>
+    </form>
+</div>

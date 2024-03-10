@@ -1,0 +1,117 @@
+﻿@model HelloJobBackEnd.Entities.Vacans
+
+<div>
+    <h4>Vacans</h4>
+    <hr />
+    <dl class="row m-3">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Company)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Company.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Position)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Position)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.City.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OperatingMode)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OperatingMode.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Experience)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Experience.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Salary)
+        </dt>
+        <dd class = "col-sm-10">
+            @(Model.Salary == 0 ? "Ə-h razılaşma ilə" : Model.Salary)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BusinessArea)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BusinessArea.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Education)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Education.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DrivingLicense)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DrivingLicense)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CreatedAt)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CreatedAt)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EndedAt)
+        </dt>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TimeIsOver)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TimeIsOver)
+        </dd>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EndedAt)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.InfoWorks)
+        </dt>
+        <dd class="col-sm-10">
+            <ol>
+                @foreach (var item in Model.InfoWorks)
+                {
+                    <li>@item.Info</li>
+                }
+            </ol>
+        
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.infoEmployeers)
+        </dt>
+        <dd class="col-sm-10">
+            <ol>
+                @foreach (var item in Model.infoEmployeers)
+                {
+                    <li>@item.Info</li>
+                }
+            </ol>
+
+        </dd>
+    </dl>
+</div>
+<div class="m-3">
+    <a asp-action="Accept" asp-route-id="@Model.Id" class="btn btn-inverse waves-effect waves-light">Accept</a>
+    <a asp-action="Reject" asp-route-id="@Model.Id" class="btn btn-success waves-effect waves-light">Reject</a>
+    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger waves-effect waves-light">Delete</a>
+    <a asp-action="Index" class="btn waves-effect waves-light btn-inverse">Back to List</a>
+</div>

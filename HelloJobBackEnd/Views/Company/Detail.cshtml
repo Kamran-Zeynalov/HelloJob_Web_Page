@@ -1,0 +1,175 @@
+﻿@{
+    ViewBag.Title = "Company Detail page";
+}
+@model Company
+<section id="titles_and_bgblue">
+    <div class="blueback"></div>
+    <div class="container">
+        <div class="row">
+            <div class="titles col-lg-12 col-md-12">
+                <ul>
+                    <li>
+                        <a asp-controller="home" asp-action="index">İş elanları</a>
+                    </li>
+                    <li>
+                        <a asp-controller="company" asp-action="index" >Şirkətlər</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="search_titles_bottom col-lg-12 col-md-12">
+                <div class="searchbar full">
+                    <div class="searchbar_top" style="display: flex;">
+                        <form method="post" action="#" class="search">
+                            <div class="input">
+                                <input type="text" name="search" class="search-input" placeholder="Vəzifəyə uyğun vakansiya axtarın...." autocomplete="off">
+                            </div>
+                        </form>
+
+
+                    </div>
+
+                </div>
+                <div class="search-results d-block"></div>
+
+                <script>
+                    const searchForm = document.querySelector('.search');
+                    const searchInput = searchForm.querySelector('.search-input');
+                    const searchResults = document.querySelector('.search-results');
+
+                    let timeoutId;
+
+                    searchInput.addEventListener('input', (e) => {
+                        const searchQuery = e.target.value.trim();
+                        if (searchQuery.length < 2) {
+                            searchResults.innerHTML = '';
+                            return;
+                        }
+                        clearTimeout(timeoutId);
+                        timeoutId = setTimeout(() => {
+                            fetch(`/Home/Search?search=${searchQuery}`)
+                                .then(response => response.text())
+                                .then(data => {
+                                    searchResults.innerHTML = data;
+                                })
+                                .catch(error => console.log(error));
+                        }, 500);
+                    });
+                </script>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section id="company_detail">
+    <div class="breadcrumbs-block">
+        <div class="container">
+            <ul class="breadcrumbs">
+                <li>
+                    <a asp-controller ="home" asp-action="index">Əsas səhifə</a>
+                </li>
+                <li>/</li>
+                <li>
+                    <a asp-controller="company" asp-action="index">Şirkətlər</a>
+                </li>
+                <li>/</li>
+                <li>
+                    <a asp-controller="company" asp-action="detail" asp-route-id="@Model.Id">@Model.Name</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <h3 class="infos">@Model.Name İŞ ELANLARI</h3>
+
+        <div class="company_vacans">
+            <div class="row">
+                <div class="col-lg-8 col-md-6">
+                    @foreach (Vacans vacans in Model.Vacans)
+                    {
+                        <div class="vacancies">
+                            <div class="company_vacans__href">
+                                <a asp-controller="company" asp-action="vacansdetail" asp-route-id="@vacans.Id" target="_blank">
+                                    <div class="item_left">
+                                        <div class="icon" style="
+                         width: 58px !important;height:auto !important">
+                                            <img style="
+                                 width: 100%;
+                                 object-fit: contain;
+                                  " src="~/assets/images/BusinessTitle/@vacans.BusinessArea.BusinessTitle.Image"
+                                                 alt="@vacans.Company.Name" />
+                                        </div>
+                                        <div class="title">
+                                            <h3>@vacans.Position</h3>
+                                            <p>@vacans.BusinessArea.Name</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="item_right">
+                                    <span class="salary">@(vacans.Salary == 0 ? "Ə-h razılaşma ilə" : vacans.Salary) (AZN)</span>
+                                    <span class="date">@vacans.CreatedAt.ToString("dd.MM")</span>
+                                    <span class="like">
+                                    <a class="like-button" data-item-id="@vacans.Id" data-item-type="Vacans">
+                                        <i class="fa-regular fa-heart unliked"></i>
+                                    </a>
+                                        <a class="unliked-button" data-item-id="@vacans.Id" data-item-type="Vacans">
+                                            <i class="fa-solid fa-heart liked @(vacans.WishListItems.Any(w => w.WishList.User.UserName == User.Identity.Name && w.IsLiked == true) ? "hidden" : "")"></i>
+                                    </a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                 
+                 
+                </div>
+                <div class="col-lg-4 col-md-6 mb-3">
+                    <div class="company_contact">
+                        <div class="company_contact_body">
+                            <div class="contact_body">
+                                <div class="stick">
+                                    <div class="info">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="item" id="item1">
+                                                    <div class="icon d-flex justify-content-between">
+                                                        <div class="all d-flex">
+                                                            <div class="image">
+                                                                <img src="https://www.hellojob.az/content/assets/images/resume/svg-icons/mail.svg"
+                                                                     alt="" />
+                                                            </div>
+                                                            <div class="text focus">
+                                                                <h4 class="secrets_title">
+                                                                    E-poçtu göster
+                                                                </h4>
+                                                                <h4 class="secrets d-none">
+                                                                   @Model.Email
+                                                                </h4>
+                                                                <p>E-poçt</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="lock">
+                                                            <div class="locking">
+                                                                <div class="image">
+                                                                    <i class="bi bi-lock close"></i>
+                                                                    <i class="bi bi-unlock open"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section Script{
+    <script src="~/assets/js/details.js"></script>
+}
+

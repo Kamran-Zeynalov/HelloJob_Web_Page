@@ -1,0 +1,88 @@
+﻿@model User
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="row m-3">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        @if (Model.Cvs.Any())
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Cvs)
+            </dt>
+            <dd class="col-sm-10">
+                <ol>
+                    @foreach (var cv in Model.Cvs)
+                    {
+                        <li>
+                            <p>@string.Concat(cv.Name,"",cv.Surname)</p>
+                            <p>@cv.Position</p>
+                            <div class="user_img" style="width: 150px; height: 150px;">
+                                <img src="~/assets/images/User/@cv.Image" style="width: 100%;" />
+                            </div>
+                        </li>
+                    }
+                </ol>
+            </dd>
+        }
+        else
+        {
+            <dt class="col-sm-2">
+                Companies and Companie's Vacans
+            </dt>
+            <dd class="col-sm-10">
+                <ul>
+                    @foreach (var companies in Model.Companies)
+                    {
+                        <li>
+                            <div class="d-flex align-items-center">
+                                <div class="user_img" style="width: 100px; height: 100px;">
+                                    <img src="~/assets/images/Company/@companies.Image" style="width: 100%;" />
+                                </div>
+                                <p>@companies.Name</p>
+                            </div>
+                            <ol>
+                                @foreach (var vacans in companies.Vacans)
+                                {
+                                    <li>
+                                        <p>@vacans.Position</p>
+                                    </li>
+                                }
+                            </ol>
+                        </li>
+                    }
+                </ul>
+            </dd>
+        }
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EmailConfirmed)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EmailConfirmed)
+        </dd>
+ 
+    </dl>
+</div>
+<div class=" m-3">
+    <a asp-action="Accept" asp-route-id="@Model.Id" class="btn btn-inverse waves-effect waves-light">Accept</a>
+    <a asp-action="Reject" asp-route-id="@Model.Id" class="btn btn-success waves-effect waves-light">Reject</a>
+    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger waves-effect waves-light">Delete</a>
+    <a asp-action="Index" class="btn waves-effect waves-light btn-inverse">Back to List</a>
+</div>

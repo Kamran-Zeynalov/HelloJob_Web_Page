@@ -1,0 +1,320 @@
+﻿@{
+    ViewBag.Title = "Hello page";
+    List<Company> companies = ViewBag.Company;
+    List<BusinessTitle> titles = ViewBag.Titles;
+}
+
+@model  List<Vacans>
+@if (TempData["Register"] != null)
+{
+    if ((bool)TempData["Register"] == true)
+    {
+        <input type="hidden" id="registerSuccess" />
+    }
+    else
+    {
+        <input type="hidden" id="registerError" />
+
+    }
+}
+@if (TempData["Login"] != null)
+{
+    if ((bool)TempData["Login"] == true)
+    {
+        <input type="hidden" id="loginSuccess" />
+    }
+    else
+    {
+        <input type="hidden" id="loginError" />
+
+    }
+}
+@if (TempData["ForgotPassword"] != null)
+{
+    if ((bool)TempData["ForgotPassword"] == true)
+    {
+        <input type="hidden" id="forgotSuccess" />
+    }
+    else
+    {
+        <input type="hidden" id="forgotError" />
+    }
+}
+@if (TempData["Security"] != null)
+{
+    if ((bool)TempData["Security"] == true)
+    {
+        <input type="hidden" id="securitySuccess" />
+    }
+    else
+    {
+        <input type="hidden" id="securityError" />
+    }
+}
+
+@if (TempData["Subscribe"] != null)
+{
+    if ((bool)TempData["Subscribe"] == true)
+    {
+        <input type="hidden" id="subscribeSuccess" />
+    }
+    else
+    {
+        <input type="hidden" id="subscribeError" />
+
+    }
+}
+
+<section id="titles_and_bgblue">
+    <div class="blueback">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="titles col-lg-12 col-md-12">
+                <ul>
+                    <li>
+                        <a asp-controller="home" asp-action="index">İş elanları</a>
+                    </li>
+                    <li>
+                        <a asp-controller="cvpage" asp-action="index">CV-lər</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="search_titles_bottom col-lg-12 col-md-12">
+                <div class="searchbar full">
+                    <div class="searchbar_top" style="display: flex;">
+                        <form method="post" action="#" class="search">
+                            <div class="input">
+                                <input type="text" name="search" class="search-input" placeholder="Vəzifəyə uyğun vakansiya axtarın...." autocomplete="off">
+                            </div>
+                            <button type="submit" class="search_btn"><span>Axtar</span></button>
+                        </form>
+                      
+               
+                    </div>
+                   
+                </div>
+                <div class="search-results d-block"></div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="sliders">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="title">
+                    <h1>
+                        İş elanları 2023
+                    </h1>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="responsive">
+                    @if (User.Identity.IsAuthenticated && User.IsInRole(UserRole.employeer.ToString()))
+                    {
+                        <div class="item">
+                            <div class="new-cat-card apply-cv">
+                                <a asp-controller="myaccount" asp-action="createcv">
+                                    <img src="https://www.hellojob.az/content/assets/images/vacancies/upload.svg">
+                                    <div class="new-cat-name"><p>CV əlavə et</p></div>
+                                    <div class="new-cat-count"><p>Şirkətlər sizi tapsın</p></div>
+                                </a>
+                            </div>
+                        </div>
+                    }
+                    @foreach (BusinessTitle title in titles)
+                    {
+                        int totalVac = title.BusinessAreas.Sum(areas => areas.Vacans.Count(cv => cv.TimeIsOver == false));
+                        <div class="item">
+                            <div class="new-cat-card">
+                                <a  class="title-link" data-titleid="@title.Id">
+                                    <img src="~/assets/images/BusinessTitle/@title.Image" alt="Maliyyə">
+                                    <div class="new-cat-name"><p>@title.Name</p></div>
+                                    <div class="new-cat-count"><p><span>@totalVac</span> iş elanı</p></div>
+                                </a>
+                            </div>
+                        </div>
+                    }
+         
+               
+                </div>
+            </div>
+        </div>
+        </div>
+</section>
+<section id="works">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="title">
+                    <h1>
+                        Vakansiyalar
+                    </h1>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 col-md-8" id="partials">
+                        @await Html.PartialAsync("_HomePartial",Model)
+                       
+                    </div>
+                    <div class="col-lg-4 col-md-4 mb-3">
+                        <div class="sticky_element">
+                            <div class="reclams">
+                                <img src="https://www.hellojob.az/uploads/banners/2023/05/01/kapital-bank-banner-644f848092e7a-9bb97ce3487c22cc702dcd5e0ccb309f644f848092e8e-aryZtKUi6v_De5r.jpg" alt="">
+                            </div>
+                            <div class="companies">
+
+                                @foreach (Company item in companies)
+                                {
+                                    <div class="company">
+                                        <a asp-controller="company" asp-action="detail" asp-route-id="@item.Id" class="full">
+                                            <div>
+                                                <div class="company_images" style="padding:0px !important; position:static !important;">
+                                                    <div class="image" style="
+                                                                  height: 70px;
+                                                                   display: flex;
+                                                                   justify-content: center;">
+                                                                                                           
+                                                        <img src="~/assets/images/Company/@item.Image"
+                                                             alt="@item.Name" />
+                                                    </div>
+                                                </div>
+                                                <p style="
+                                             display: flex;
+                                     justify-content: center;
+                                                ">@item.Name</p>
+                                                <p>Vakansiya sayı <span>@item.Vacans.Count()</span> </p>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                }
+
+
+                            </div>
+                     
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Script{
+
+    <script>
+        //Searching 
+        const searchForm = document.querySelector('.search');
+        const searchInput = searchForm.querySelector('.search-input');
+        const searchResults = document.querySelector('.search-results');
+
+
+        searchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const searchQuery = searchInput.value.trim();
+            fetch(`/home/searchresult?search=${encodeURIComponent(searchQuery)}`)
+                .then(response => response.text())
+                .then(data => {
+                    const partialContainer = document.getElementById('partials');
+                    partialContainer.innerHTML = data;
+                })
+                .catch(error => console.error('Fetch hatası:', error));
+        });
+
+        let timeoutId;
+
+        searchInput.addEventListener('input', (e) => {
+            const searchQuery = e.target.value.trim();
+            if (searchQuery.length < 2) {
+                searchResults.innerHTML = '';
+                return;
+            }
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+                fetch(`/Home/Search?search=${searchQuery}`)
+                    .then(response => response.text())
+                    .then(data => {
+                        searchResults.innerHTML = data;
+                    })
+                    .catch(error => console.log(error));
+            }, 200);
+        });
+
+
+        //titles sorted
+        var titleLinks = document.querySelectorAll('.title-link');
+
+        titleLinks.forEach(function (link) {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                var titleid = this.getAttribute('data-titleid');
+
+                fetch('/home/sorted?titleid=' + titleid)
+                    .then(response => response.text())
+                    .then(data => {
+                        var partialContainer = document.getElementById('partials');
+
+                        partialContainer.innerHTML = data;
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            });
+        });
+       
+
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            if ($("#registerSuccess").length) {
+                toastr["success"]("Uğurlu əməliyyət!", "Salam.Zəhmət olmasa e-poçtuvuzu yoxlayın")
+            }
+            else if ($("#registerError").length) {
+                toastr["error"]("Xəta baş verdi!", "Yenidən yoxlayın...")
+            }
+        })
+    </script>
+    <script>
+        $(document).ready(function () {
+            if ($("#loginSuccess").length) {
+                toastr["success"]("Sizi yenidən görmək xoşdur!", "Salam")
+            }
+            else if ($("#loginError").length) {
+                toastr["error"]("İstifadəçi adı və ya Parol səhfdir!", "Bağışlayın...")
+            }
+        })
+    </script>
+    <script>
+        $(document).ready(function () {
+            if ($("#forgotSuccess").length) {
+                toastr["success"]("Uğurlu əməliyyət!", "Salam.Zəhmət olmasa e-poçtuvuzu yoxlayın")
+            }
+            else if ($("#forgotError").length) {
+                toastr["error"]("Xəta baş verdi!", "Bağışlayın...")
+            }
+        })
+    </script>
+    <script>
+        $(document).ready(function () {
+            if ($("#securitySuccess").length) {
+                toastr["success"]("Uğurlu əməliyyət!", "Salam,Sizin İstifadəçi adı və ya Parol dəyişdirildi yenidən giriş edin.")
+            }
+            else if ($("#securityError").length) {
+                toastr["error"]("Xəta baş verdi!", "Bağışlayın...")
+            }
+        })
+    </script>
+    <script>
+        $(document).ready(function () {
+            if ($("#subscribeSuccess").length) {
+                toastr["success"]("Uğurlu əməliyyət!", "Salam siz artıq səhifədəki yeniliklərdən xəbərdar olacaqsınız")
+            }
+            else if ($("#subscribeError").length) {
+                toastr["error"]("Xəta baş verdi!", "Bu Email istifadə olunub və ya başqa səbəbdən...")
+            }
+        })
+    </script>
+}

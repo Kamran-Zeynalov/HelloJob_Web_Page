@@ -1,0 +1,31 @@
+﻿@model List<Vacans>
+@{
+    int count = 1;
+}
+<p>Gözləmədə olan elanlar</p>
+<table class="table caption-top">
+
+    <thead>
+        <tr>
+            <th scope="col">№</th>
+            <th scope="col">Şirkət adı</th>
+            <th scope="col">Vəzifə</th>
+            <th scope="col">E-poçt</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td scope="row">@count</td>
+                <td>@item.Company.Name</td>
+                <td>@item.Position</td>
+                <td>@item.Company.Email</td>
+                <td>@(item.Status == OrderStatus.Pending ? "Gözləmədə" : item.Status)</td>
+            </tr>
+            count++;
+        }
+    </tbody>
+</table>

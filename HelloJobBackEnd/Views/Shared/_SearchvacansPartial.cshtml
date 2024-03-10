@@ -1,0 +1,35 @@
+﻿@model List<Vacans>
+
+<ul class="search_ul" style="list-style:none;margin:0px;padding:0px;">
+	@foreach (Vacans item in Model)
+	{
+		<li>
+            <div class="vacancies">
+                <div class="vacancies_href">
+                    <a asp-controller="company" asp-action="vacansdetail" asp-route-id="@item.Id">
+                        <div class="item_left">
+                            <div class="icon" style="
+                         width: 58px !important;height:auto !important">
+                                <img style="
+                                 width: 100%;
+                                 object-fit: contain;
+" src="~/assets/images/Company/@item.Company.Image"
+                                     alt="@item.Company.Name" />
+                            </div>
+                            <div class="title">
+                                <h3 style="position:static">@item.Position</h3>
+                                <p>@item.BusinessArea.BusinessTitle.Name</p>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="item_right">
+                        <span class="salary">@(item.Salary == 0 ? "Ə-h razılaşma ilə" : item.Salary) (AZN)</span>
+                        <span class="date">@item.CreatedAt.ToString("dd/MM")</span>
+                    </div>
+                </div>
+            </div>
+
+		</li>
+		
+	}
+</ul>

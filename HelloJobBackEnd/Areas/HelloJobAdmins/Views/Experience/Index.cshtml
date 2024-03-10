@@ -1,0 +1,123 @@
+﻿@model IEnumerable<Experience>
+
+
+@if (TempData["Create"] != null)
+{
+    if ((bool)TempData["Create"] == true)
+    {
+        <input type="hidden" id="createSuccess" />
+    }
+    else
+    {
+        <input type="hidden" id="createError" />
+
+    }
+}
+@if (TempData["Edit"] != null)
+{
+    if ((bool)TempData["Edit"] == true)
+    {
+        <input type="hidden" id="editSuccess" />
+    }
+    else
+    {
+        <input type="hidden" id="editError" />
+
+    }
+}
+@if (TempData["Delete"] != null)
+{
+    if ((bool)TempData["Delete"] == true)
+    {
+        <input type="hidden" id="deleteSuccess" />
+    }
+    else
+    {
+        <input type="hidden" id="deleteError" />
+
+    }
+}
+<div class="alert alert-primary" role="alert">
+   Experience
+</div>
+<form method="post" asp-controller="Experience" asp-action="Index">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" name="search" id="searchInput" placeholder="Search Experience for Name">
+        <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="submitForm()">Search</button>
+    </div>
+</form>
+
+<script>
+    function submitForm() {
+        var searchValue = document.getElementById("searchInput").value;
+        var form = document.querySelector("form");
+
+        if (searchValue) {
+            form.submit();
+        } else {
+            form.action = "@Url.Action("Index")";
+            form.method = "post";
+            form.submit();
+        }
+    }
+</script>
+<p>
+    <a asp-action="Create" class="btn waves-effect waves-light btn-success btn-outline-success">Create New</a>
+
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn waves-effect waves-light btn-warning btn-outline-warning">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn waves-effect waves-light btn-info btn-outline-info">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn waves-effect waves-light btn-danger btn-outline-danger">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            if ($("#createSuccess").length) {
+                toastr["success"]("Welcome back to us!", "1 Experience  Is 'created' ")
+            }
+            else if ($("#createError").length) {
+                toastr["error"]("Username or password is incorrect!", "Upsss Sorry")
+            }
+        })
+    </script>
+    <script>
+        $(document).ready(function () {
+            if ($("#editSuccess").length) {
+                toastr["success"]("Welcome back to us!", "1 Experience Is 'Edited' ")
+            }
+            else if ($("#editError").length) {
+                toastr["error"]("Username or password is incorrect!", "Upsss Sorry")
+            }
+        })
+    </script>
+    <script>
+        $(document).ready(function () {
+            if ($("#deleteSuccess").length) {
+                toastr["success"]("Welcome back to us!", "1 Experience Is 'Deleted' ")
+            }
+            else if ($("#deleteError").length) {
+                toastr["error"]("Username or password is incorrect!", "Upsss Sorry")
+            }
+        })
+    </script>
+}

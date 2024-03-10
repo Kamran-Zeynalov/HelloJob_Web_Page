@@ -1,0 +1,274 @@
+﻿@{
+    ViewBag.Title = "CV page";
+    List<BusinessTitle> areas = ViewBag.Business;
+    List<Education> educations = ViewBag.Education;
+    List<OperatingMode> modes = ViewBag.Mode;
+    List<Experience> experiences = ViewBag.Experince;
+}
+@if (TempData["Register"] != null)
+{
+    if ((bool)TempData["Register"] == true)
+    {
+        <input type="hidden" id="registerSuccess" />
+    }
+    else
+    {
+        <input type="hidden" id="registerError" />
+
+    }
+}
+@if (TempData["Login"] != null)
+{
+    if ((bool)TempData["Login"] == true)
+    {
+        <input type="hidden" id="loginSuccess" />
+    }
+    else
+    {
+        <input type="hidden" id="loginError" />
+
+    }
+}
+@model List<Cv>
+<section id="titles_and_bgblue">
+    <div class="blueback">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="titles col-lg-12 col-md-12">
+                <ul>
+                    <li>
+                        <a asp-controller="home" asp-action="index">İş elanları</a>
+                    </li>
+                    <li>
+                        <a asp-controller="cvpage" asp-action="index">CV-lər</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="search_titles_bottom col-lg-12 col-md-12">
+                <div class="searchbar full">
+                    <div class="searchbar_top" style="display: flex;">
+                        <form method="post" action="#" class="search">
+                            <div class="input">
+                                <input type="text" name="search" class="search-input" placeholder="Vəzifəyə uyğun Cv axtarın...." autocomplete="off">
+                            </div>
+                            <button type="submit" class="search_btn"><span>Axtar</span></button>
+                        </form>
+
+
+                    </div>
+
+                </div>
+                <div class="search-results d-block"></div>
+
+             
+            </div>
+        </div>
+    </div>
+</section>
+<section id="cv_filter">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="title">
+                    <h1>
+                        FİLTRLƏ
+                    </h1>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 full_filter">
+                <div class="filters">
+                    <form id="filterForm">
+
+                        <div class="filters_item">
+                            <h3 class="title">İxtisas</h3>
+                            <div class="pro">
+                                @foreach (BusinessTitle area in areas)
+                                {
+                                    int totalCv = area.BusinessAreas.Sum(areas => areas.Cvs.Count(cv => cv.TimeIsOver==false));
+
+                                    <div class="inputs">
+                                        <div class="checkbox">
+                                            <input type="checkbox" name="businessIds" value="@area.Id" class="form-check-input mt-0">
+                                            <label for="@area.Id">@area.Name</label>
+                                        </div>
+                                        <div class="count">
+                                            <span class="prof_count">@totalCv</span>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="work_mode">
+                            <h3 class="title">İş rejimi</h3>
+                            <div class="pro">
+                                <div class="inputs">
+                                    @foreach (OperatingMode mode in modes)
+                                    {
+                                        <div class="checkbox">
+                                            <input type="checkbox" name="modeIds" value="@mode.Id" class="form-check-input mt-0">
+                                            <label for="@mode.Id">@mode.Name</label>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="education">
+                            <h3 class="title">Təhsil</h3>
+                            <div class="pro">
+                                <div class="inputs">
+                                    @foreach (Education education in educations)
+                                    {
+                                        <div class="checkbox">
+                                            <input type="checkbox" name="educationIds" value="@education.Id" class="form-check-input mt-0">
+                                            <label for="@education.Id">@education.Name</label>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="seniority">
+                            <h3 class="title">İş Stajı</h3>
+                            <div class="seniorties">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <div id="ranger">
+                                            <div class="range" style="left: 0%; width: 0%;"></div>
+                                            <span tabindex="0" class="handle" style="left: 0%;"></span>
+                                            <span tabindex="0" class="handle" style="left: 0%;"></span>
+                                        </div>
+                                        <div class="interval text-center">
+                                            @foreach (Experience experience in experiences)
+                                            {
+                                                <div class="checkbox">
+                                                    <input type="radio" name="experienceIds" value="@experience.Id" class="form-check-input mt-0 d-none">
+                                                    <label for="@experience.Id">@experience.Name</label>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="drivers">
+                            <h3 class="title">Sürücülük vəsiqəsi</h3>
+                            <div class="pro">
+                                <div class="inputs">
+                                    <div class="checkbox">
+                                        <input type="checkbox" name="hasDriverLicense" value="Var" id="driverLicenseCheckbox" class="form-check-input mt-0">
+                                        <label for="driverLicenseCheckbox">Var</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filters_btns d-flex">
+                            <div class="row">
+                                <div class="col-lg-6">
+
+                                    <button type="submit" class="btn btn-primary  w-100 my-2">Axtar</button>
+
+
+                                </div>
+                                <div class="col-lg-6">
+                                    <button type="button" class="btn btn-light w-100 d-block my-2" onclick="resetForm()">Təmizlə</button>
+                                </div>
+                            </div>
+                        </div>
+                      </form>
+                </div>
+
+            </div>
+            <div class="col-lg-9 col-md-9">
+                <div class="right_side">
+                    <div class="sorting">
+                        <label for="">Sırala</label>
+                        <select name="sort" id="sort2" class="form-control selected">
+                            <option value="new">Yenilər</option>
+                            <option value="old">Köhnələr</option>
+                            <option value="salary_desc">Maaşa görə(çox)</option>
+                            <option value="salary_asc">Maaşa görə(az)</option>
+                        </select>
+                    </div>
+
+                    <div class="persons_cv">
+                        <div class="user_block"  style="width: 100%;">
+                            <a href="" target="_blank">
+                                <img style="width: 100%;" src="https://www.hellojob.az/uploads/banners/2023/04/08/cv-elave-et-banner-64312af897dcb-8974446226af1314d43ee5cd3689350d64312af897deb-9z_D06zcQTxQh5p.png" alt="">
+                            </a>
+
+                        </div>
+                            <div id="userBlocks">
+                                @await Html.PartialAsync("_UserblocksPartial", Model)
+                            </div>
+                    </div>
+               
+                </div>
+
+            </div>
+        </div>
+      
+    </div>
+</section>
+
+@section Script{
+    <script src="~/assets/js/cvpage.js"></script>
+
+    <script>
+        const searchForm = document.querySelector('.search');
+        const searchInput = searchForm.querySelector('.search-input');
+        const searchResults = document.querySelector('.search-results');
+
+
+        searchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const searchQuery = searchInput.value.trim();
+            fetch(`/cvpage/SearchResult?search=${encodeURIComponent(searchQuery)}`)
+                .then(response => response.text())
+                .then(data => {
+                    const partialContainer = document.getElementById('userBlocks');
+                    partialContainer.innerHTML = data;
+                })
+                .catch(error => console.error(error));
+        });
+
+        let timeoutId;
+
+        searchInput.addEventListener('input', (e) => {
+            const searchQuery = e.target.value.trim();
+            if (searchQuery.length < 2) {
+                searchResults.innerHTML = '';
+                return;
+            }
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+                fetch(`/CvPage/Search?search=${searchQuery}`)
+                    .then(response => response.text())
+                    .then(data => {
+                        searchResults.innerHTML = data;
+                    })
+                    .catch(error => console.log(error));
+            }, 200);
+        });
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            if ($("#registerSuccess").length) {
+                toastr["success"]("Uğurlu əməliyyət!", "Salam.Zəhmət olmasa e-poçtuvuzu yoxlayın")
+            }
+            else if ($("#registerError").length) {
+                toastr["error"]("Xəta baş verdi!", "Yenidən yoxlayın...")
+            }
+        })
+    </script>
+    <script>
+        $(document).ready(function () {
+            if ($("#loginSuccess").length) {
+                toastr["success"]("Sizi yenidən görmək xoşdur!", "Salam")
+            }
+            else if ($("#loginError").length) {
+                toastr["error"]("İstifadəçi adı və ya Parol səhfdir!", "Bağışlayın...")
+            }
+        })
+    </script>
+}

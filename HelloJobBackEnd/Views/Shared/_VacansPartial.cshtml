@@ -1,0 +1,135 @@
+﻿@model List<Vacans>
+
+
+<div class="col-lg-12 ">
+    @foreach (var item in Model)
+    {
+        <div class="vacancies">
+            <div class="vacancies_href">
+                <a asp-controller="company" asp-action="vacansdetail" asp-route-id="@item.Id">
+                    <div class="item_left">
+                        <div class="icon" style="
+                         width: 58px !important;height:auto !important">
+                            <img style="
+                                 width: 100%;
+                                 object-fit: contain;
+"                                 src="~/assets/images/Company/@item.Company.Image"
+                                 alt="@item.Company.Name" />
+                        </div>
+                        <div class="title">
+                            <h3 style="
+                            position: inherit !important;">
+                            @item.Position
+                        </h3>
+                            <p>@item.Company.Name</p>
+                        </div>
+                    </div>
+                </a>
+                <div class="item_right">
+                    <span class="salary">@(item.Salary==0 ? "Ə-h razılaşma ilə" : item.Salary) (AZN)</span>
+                    <span class="date">@item.CreatedAt.ToString("dd/MM")</span>
+                </div>
+                <div class="vacans_buttons">
+                    <a asp-controller="myaccount" asp-action="editVacans" asp-route-id="@item.Id" class="edited btn">
+                        <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/edit.svg"
+                             alt="" />
+                        <span>Redaktə et</span>
+                    </a>
+                    <a class="deleted btn" asp-controller="myaccount" asp-action="deleteVacans" asp-route-id="@item.Id" style="
+    border-radius: 10px;
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    border: 1px solid transparent;
+    background-color: #F4F6F9;
+    color: black;
+    font-weight: 500;
+">
+                        <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/delete.svg"
+                             alt="" />
+                        <span>Sil</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                <a class="page-link" asp-action="MySticker" asp-route-page="@(ViewBag.CurrentPage-1)" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+
+            @if (ViewBag.TotalPage <= 5)
+            {
+                @for (int i = 1; i <= (int)ViewBag.TotalPage; i++)
+                {
+                    <li class="page-item @(i == ViewBag.CurrentPage ? "disabled" : "")">
+                        <a class="page-link" asp-action="MySticker" asp-route-page="@i">@i</a>
+                    </li>
+                }
+            }
+            else
+            {
+                @if (ViewBag.CurrentPage <= 3)
+                {
+                    for (int i = 1; i <= 5; i++)
+                    {
+                        <li class="page-item @(i == ViewBag.CurrentPage ? "disabled" : "")">
+                            <a class="page-link" asp-action="MySticker" asp-route-page="@i">@i</a>
+                        </li>
+                    }
+                    <li class="page-item disabled">
+                        <a class="page-link">...</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" asp-action="MySticker" asp-route-page="@ViewBag.TotalPage">@ViewBag.TotalPage</a>
+                    </li>
+                }
+                else if (ViewBag.CurrentPage >= (int)ViewBag.TotalPage - 2)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-action="MySticker" asp-route-page="1">1</a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a class="page-link">...</a>
+                    </li>
+                    for (int i = (int)ViewBag.TotalPage - 4; i <= (int)ViewBag.TotalPage; i++)
+                    {
+                        <li class="page-item @(i == ViewBag.CurrentPage ? "disabled" : "")">
+                            <a class="page-link" asp-action="MySticker" asp-route-page="@i">@i</a>
+                        </li>
+                    }
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-action="MySticker" asp-route-page="1">1</a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a class="page-link">...</a>
+                    </li>
+                    for (int i = ViewBag.CurrentPage - 2; i <= ViewBag.CurrentPage + 2; i++)
+                    {
+                        <li class="page-item @(i == ViewBag.CurrentPage ? "disabled" : "")">
+                            <a class="page-link" asp-action="MySticker" asp-route-page="@i">@i</a>
+                        </li>
+                    }
+                    <li class="page-item disabled">
+                        <a class="page-link">...</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" asp-action="MySticker" asp-route-page="@ViewBag.TotalPage">@ViewBag.TotalPage</a>
+                    </li>
+                }
+            }
+
+            <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPage ? "disabled" : "")">
+                <a class="page-link" asp-action="MySticker" asp-route-page="@(ViewBag.CurrentPage+1)" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>

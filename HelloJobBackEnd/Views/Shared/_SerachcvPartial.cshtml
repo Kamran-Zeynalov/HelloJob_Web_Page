@@ -1,0 +1,64 @@
+﻿@model List<Cv>
+
+<ul class="search_ul" style="list-style:none;margin:0px;padding:0px;">
+    @foreach (Cv item in Model)
+    {
+        <li>
+            <div class="user_block">
+                <a asp-controller="cvpage" asp-action="detail" asp-route-id="@item.Id">
+                    <div class="header_user">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="user_img">
+                                <img src="~/assets/images/User/@item.Image"
+                                     alt="" />
+                            </div>
+                            <div class="d-flex justify-content-between w-100">
+                                <div class="user_desc">
+                                    <h3 class="profession">
+                                        @item.Position
+                                    </h3>
+
+                                    <p class="fullname">@item.Name @item.Surname</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="user_options" style="justify-content:space-around !important">
+                        <div class="item">
+                            <div class="icon">
+                                <img src="https://www.hellojob.az/content/assets/images/resume/svg-icons/user-clock.svg"
+                                     alt="" />
+                            </div>
+                            <div class="text">
+                                <h4>@item.OperatingMode.Name</h4>
+                                <p>İş rejimi</p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="icon">
+                                <img src="https://www.hellojob.az/content/assets/images/resume/svg-icons/money.svg"
+                                     alt="" />
+                            </div>
+                            <div class="text">
+                                <h4>@(item.Salary == 0 ? "Ə-h razılaşma ilə" : item.Salary) (AZN)</h4>
+                                <p>Minimum əmək haqqı </p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="icon">
+                                <img src="https://www.hellojob.az/content/assets/images/resume/svg-icons/briefcase.svg"
+                                     alt="" />
+                            </div>
+                            <div class="text">
+                                <h4>@item.Experience.Name</h4>
+                                <p>İş staji</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </li>
+
+    }
+</ul>

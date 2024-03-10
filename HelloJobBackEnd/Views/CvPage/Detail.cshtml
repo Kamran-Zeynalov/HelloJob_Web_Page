@@ -1,0 +1,570 @@
+﻿@{
+    ViewBag.Title = "CV Detail page";
+    List<Cv> related = ViewBag.Related;
+    Dictionary<string, string> setting = ViewBag.Setting;
+
+}
+@if (TempData["Register"] != null)
+{
+    if ((bool)TempData["Register"] == true)
+    {
+        <input type="hidden" id="registerSuccess" />
+    }
+    else
+    {
+        <input type="hidden" id="registerError" />
+
+    }
+}
+@if (TempData["Login"] != null)
+{
+    if ((bool)TempData["Login"] == true)
+    {
+        <input type="hidden" id="loginSuccess" />
+    }
+    else
+    {
+        <input type="hidden" id="loginError" />
+
+    }
+}
+@model Cv
+
+<section id="titles_and_bgblue">
+    <div class="blueback"></div>
+    <div class="container">
+        <div class="row">
+            <div class="titles col-lg-12 col-md-12">
+                <ul>
+                    <li>
+                        <a asp-controller="home" asp-action="index">İş elanları</a>
+                    </li>
+                    <li>
+                        <a asp-controller="cvpage" asp-action="index">CV-lər</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="details">
+    <div class="breadcrumbs-block">
+        <div class="container">
+            <ul class="breadcrumbs">
+                <li>
+                    <a href="">@Model.BusinessArea.Name</a>
+                </li>
+                <li>/</li>
+                <li>
+                    <a href="">@Model.Position</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-6">
+                <div class="right_side">
+                    <div class="persons_cv">
+                        <div class="user_block">
+                            <a href="" target="_blank">
+                                <div class="header_user">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="user_img">
+                                            <img src="~/assets/images/User/@Model.Image"
+                                                 alt="@Model.Name" />
+                                        </div>
+                                        <div class="d-flex justify-content-between w-100">
+                                            <div class="user_desc">
+                                                <h3 class="profession">
+                                                   @string.Concat(Model.Name," ",Model.Surname)
+                                                </h3>
+
+                                                <p class="fullname">
+                                                       @Model.Position
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="hearts">
+                                <span class="like">
+                                    <a class="like-button" data-item-id="@Model.Id" data-item-type="Cv">
+                                        <i class="fa-regular fa-heart unliked"></i>
+                                    </a>
+                                    <a class="unliked-button" data-item-id="@Model.Id" data-item-type="Cv">
+                                        <i class="fa-solid fa-heart liked @(Model.WishListItems.Any(w => w.WishList.User.UserName == User.Identity.Name && w.IsLiked == true) ? "hidden" : "")"></i>
+                                    </a>
+
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="users_blocks">
+                        <h3 class="infos">Şəxsİ məlumatlar</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="item">
+                                    <div class="icon">
+                                        <img src="~/assets/images/@setting["BirthdayIcon"]"
+                                             alt="" />
+                                    </div>
+                                    <div class="text">
+                                        <h4>@Model.BornDate.ToString("dd/mm/yyyy")</h4>
+                                        <p>Doğum tarixi</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="item mb-0">
+                                    <div class="icon">
+                                        <img src="~/assets/images/@setting["CityIcon"]"
+                                             alt="" />
+                                    </div>
+                                    <div class="text">
+                                        <h4>@Model.City.Name</h4>
+                                        <p>Şəhər</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="users_blocks">
+                        <h3 class="infos">İŞ MƏLUMATLARI</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="item">
+                                    <div class="icon">
+                                        <img src="~/assets/images/@setting["UserOperatingModeIcon"]"
+                                             alt="" />
+                                    </div>
+                                    <div class="text">
+                                        <h4>@Model.OperatingMode.Name</h4>
+                                        <p>İş rejimi</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="item mb-0">
+                                    <div class="icon">
+                                        <img src="~/assets/images/@setting["UserOperatingModeIcon"]"
+                                             alt="" />
+                                    </div>
+                                    <div class="text">
+                                        <h4>@Model.BusinessArea.Name</h4>
+                                        <p>İşlədiyi sahə</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="item mb-0">
+                                    <div class="icon">
+                                        <img src="~/assets/images/@setting["ExperienceIcon"]"
+                                             alt="" />
+                                    </div>
+                                    <div class="text">
+                                        <h4>@Model.Experience.Name</h4>
+                                        <p>İş təcrübəsi</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="item mb-0">
+                                    <div class="icon">
+                                        <img src="~/assets/images/@setting["SalaryIcon"]"
+                                             alt="" />
+                                    </div>
+                                    <div class="text">
+                                        <h4>@(Model.Salary == 0 ? "Ə-h razılaşma ilə" : Model.Salary) (AZN)</h4>
+                                        <p>Minimum Əmək Haqqı(Azn)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="item mb-0">
+                                    <div class="icon">
+                                        <img src="~/assets/images/@setting["EducationIcon"]"
+                                             alt="" />
+                                    </div>
+                                    <div class="text">
+                                        <h4>@Model.Education.Name</h4>
+                                        <p>Təhsil</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="users_blocks">
+                        <h3 class="infos">Sürücülük vəsiqəsi</h3>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="item">
+                                    <div class="icon">
+                                        <img src="~/assets/images/@setting["FolderIcon"]"
+                                             alt="" />
+                                    </div>
+                                    <div class="d-flex justify-content-between w-100">
+                                        <div class="text">
+                                            <h4>@(Model.DrivingLicense==true ? "Var" : "Yox")</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4  col-md-6 mb-3">
+                <div class="user_contact">
+                    <div class="user_contact_body">
+                        <div class="contact_body">
+                            <div class="stick">
+                                <div class="title">
+                                    <h4>Elan Məlumatları</h4>
+                                </div>
+                                <div class="infos">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="item">
+                                                <div class="icon d-flex">
+                                                    <div class="all d-flex">
+                                                        <div class="image">
+                                                            <img src="~/assets/images/@setting["CalendarIcon"]"
+                                                                 alt="" />
+                                                        </div>
+                                                        <div class="text">
+                                                            @if (DateTime.Now >= Model.EndedAt)
+                                                            {
+                                                                <h4 style="font-size:13px">Müddəti bitib</h4>
+                                                            }
+                                                            else
+                                                            {
+                                                                <h4 class="secrets-title">
+                                                                    @Model.CreatedAt.ToString("dd.MM")
+                                                                </h4>
+                                                            }
+                                                         
+                                                            <p>Elan Tarixi</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="item">
+                                                <div class="icon d-flex">
+                                                    <div class="all d-flex">
+                                                        <div class="image">
+                                                            <img src="~/assets/images/@setting["CalendarIcon"]"
+                                                                 alt="" />
+                                                        </div>
+                                                        <div class="text">
+                                                            @if (DateTime.Now >= Model.EndedAt)
+                                                            {
+                                                                <h4 style="font-size:13px">Müddəti bitib</h4>
+                                                            }
+                                                            else
+                                                            {
+                                                                <h4 class="secrets-title">
+                                                                    @Model.EndedAt.ToString("dd.MM")
+                                                                </h4>
+                                                            }
+                                                          
+                                                            <p>Bitme Tarixi</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="item">
+                                                <div class="icon d-flex justify-content-between">
+                                                    <div class="all d-flex">
+                                                        <div class="image">
+                                                            <img src="~/assets/images/@setting["EyeIcon"]"
+                                                                 alt="" />
+                                                        </div>
+                                                        <div class="text">
+                                                            <h4 class="secrets-title">
+                                                               @Model.Count
+                                                            </h4>
+                                                            <p>Baxildi</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="stick">
+                                <div class="infos">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="item" id="item1">
+                                                <div class="icon d-flex justify-content-between">
+                                                    <div class="all d-flex">
+                                                        <div class="image">
+                                                            <img src="~/assets/images/@setting["MailIcon"]"
+                                                                 alt="" />
+                                                        </div>
+                                                        <div class="text focus">
+                                                            <h4 class="secrets_title">
+                                                                E-poçtu göster
+                                                            </h4>
+                                                            <h4 class="secrets d-none">@Model.Email</h4>
+                                                            <p> E-poçt</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="lock">
+                                                        <div class="locking">
+                                                            <div class="image">
+                                                                <i class="bi bi-lock close"></i>
+                                                                <i class="bi bi-unlock open"></i>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="stick">
+                                <div class="infos">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="item" id="item1">
+                                                <div class="icon d-flex justify-content-between">
+                                                    <div class="all d-flex">
+                                                        <div class="image">
+                                                            <img src="~/assets/images/@setting["PhoneIcon"]"
+                                                                 alt="" />
+                                                        </div>
+                                                        <div class="text focus">
+                                                            <h4 class="secrets_title">
+                                                                Nömrəni göstər
+                                                            </h4>
+                                                            <h4 class="secrets d-none">+994 @Model.Number</h4>
+                                                            <p>Əlaqə nömrəsi</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="lock">
+                                                        <div class="locking">
+                                                            <div class="image">
+                                                                <i class="bi bi-lock close"></i>
+                                                                <i class="bi bi-unlock open"></i>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="stick">
+                                <div class="title">
+                                    <h4>CV</h4>
+                                </div>
+                                <div class="infos">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="item">
+                                                <div class="icon d-flex justify-content-between">
+                                                    <div class="all d-flex">
+                                                        <div class="image">
+                                                            <img src="~/assets/images/@setting["FileIcon"]"
+                                                                 alt="" />
+                                                        </div>
+                                                        <div class="text focus">
+                                                            <p style="font-size: 16px; display: flex; justify-content: center; align-items: center; width: 100%; height: 100%;">cv.pdf formats</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="lock">
+                                                        <div class="locking">
+                                                            <a href="javascript:void(0);" onclick="downloadPDF('@Url.Content("~/assets/images/User/Cvs/" + Model.CvPDF)', '@Model.Name')" class="image">
+                                                                <i class="bi bi-file-earmark-arrow-down-fill"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                           @* <div class="stick">
+                                <div class="title">
+                                    <h4>HelloJobCv</h4>
+                                </div>
+                                <div class="infos">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="item">
+                                                <div class="icon d-flex justify-content-between">
+                                                    <div class="all d-flex">
+                                                        <div class="image">
+                                                            <img src="https://www.hellojob.az/content/assets/images/resume/svg-icons/file2.svg" alt="" />
+                                                        </div>
+                                                        <div class="text focus">
+                                                            <p style="font-size: 16px; display: flex; justify-content: center; align-items: center; width: 100%; height: 100%;">cv.pdf formats</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="lock">
+                                                        <div class="locking" id="down" onclick="downloadPDF2()">
+                                                            <div class="image">
+                                                                <i class="bi bi-file-earmark-arrow-down-fill"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="related">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="title">
+                    <h1>
+                        Oxşar Cv-lər
+                    </h1>
+                </div>
+            </div>
+            <div class="row">
+                @foreach (Cv cv in related)
+                {
+                    <div class="col-lg-6">
+                        <div class="user_block">
+                            <a asp-controller="cvpage" asp-action="detail" asp-route-id="@cv.Id">
+                                <div class="header_user">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="user_img">
+                                            <img src="~/assets/images/User/@cv.Image" alt="@cv.Name">
+                                        </div>
+                                        <div class="d-flex justify-content-between w-100">
+                                            <div class="user_desc">
+                                                <h3 class="profession">@cv.Position </h3>
+
+                                                <p class="fullname">@string.Concat(cv.Name," ",cv.Surname)</p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="user_options" style=" font-size: 12px !important;">
+                                    <div class="item">
+                                        <div class="icon">
+                                            <img src="~/assets/images/@setting["UserOperatingModeIcon"]"
+                                                 alt="" />
+                                        </div>
+                                        <div class="text">
+                                            <h4>@cv.OperatingMode.Name</h4>
+                                            <p>İş rejimi</p>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="icon">
+                                            <img src="~/assets/images/@setting["SalaryIcon"]"
+                                                 alt="" />
+                                        </div>
+                                        <div class="text">
+                                            <h4>@(cv.Salary == 0 ? "Ə-h razılaşma ilə" : cv.Salary) (AZN)</h4>
+                                            <p>Minimum əmək haqqı AZN</p>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="icon">
+                                            <img src="~/assets/images/@setting["ExperienceIcon"]"
+                                                 alt="" />
+                                        </div>
+                                        <div class="text">
+                                            <h4>@cv.Experience.Name</h4>
+                                            <p>İş staji</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="hearts">
+                                <span class="like">
+                                    <a class="like-button" data-item-id="@cv.Id" data-item-type="Cv">
+                                        <i class="fa-regular fa-heart unliked"></i>
+                                    </a>
+                                    <a class="unliked-button" data-item-id="@cv.Id" data-item-type="Cv">
+                                        <i class="fa-solid fa-heart liked @(cv.WishListItems.Any(w => w.WishList.User.UserName == User.Identity.Name && w.IsLiked == true) ? "hidden" : "")"></i>
+                                    </a>
+
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                }
+      
+            </div>
+        </div>
+    </div>
+</section>
+@section Script{
+    <script src="~/assets/js/details.js"></script>
+@*    <script>
+        function downloadPDF2() {
+            const element = document.querySelector('#details');
+
+            html2pdf().set({
+                filename: 'HJ.pdf',
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            }).from(element).save();
+        }
+    </script>*@
+    <script>
+
+        function downloadPDF(pdfUrl, userName) {
+            var downloadLink = document.createElement("a");
+            downloadLink.href = pdfUrl;
+            downloadLink.download = userName + "_CV.pdf";
+            downloadLink.click();
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            if ($("#registerSuccess").length) {
+                toastr["success"]("Uğurlu əməliyyət!", "Salam.Zəhmət olmasa e-poçtuvuzu yoxlayın")
+            }
+            else if ($("#registerError").length) {
+                toastr["error"]("Xəta baş verdi!", "Yenidən yoxlayın...")
+            }
+        })
+    </script>
+    <script>
+        $(document).ready(function () {
+            if ($("#loginSuccess").length) {
+                toastr["success"]("Sizi yenidən görmək xoşdur!", "Salam")
+            }
+            else if ($("#loginError").length) {
+                toastr["error"]("İstifadəçi adı və ya Parol səhfdir!", "Bağışlayın...")
+            }
+        })
+    </script>
+}

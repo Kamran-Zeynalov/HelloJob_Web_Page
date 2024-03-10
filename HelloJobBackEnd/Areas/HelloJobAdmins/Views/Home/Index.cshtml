@@ -1,0 +1,175 @@
+﻿@{
+    List<Vacans> vacans = ViewBag.Vacans;
+    List<Company> company = ViewBag.Company;
+    List<Cv> cvs = ViewBag.Cvs;
+    List<User> users = ViewBag.Users;
+}
+
+<div class="alert alert-primary" role="alert">
+    You can do anything if you have enough reasons.
+</div>
+<div class="row dashboard-header">
+    <div class="col-lg-3 col-md-6">
+        <div class="card dashboard-product">
+            <span>Users</span>
+            <h2 class="dashboard-total-products">@users.Where(x=>x.EmailConfirmed==true).Count()</h2>
+            <span class="label label-warning">Active</span>Now
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="card dashboard-product">
+            <span>Company</span>
+            <h2 class="dashboard-total-products">@company.Where(x=>x.Status==OrderStatus.Accepted).Count()</h2>
+            <span class="label label-primary">Active</span>Now
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="card dashboard-product">
+            <span>Vacans</span>
+            <h2 class="dashboard-total-products"><span>@vacans.Where(x=>x.Status==OrderStatus.Accepted).Count()</span></h2>
+            <span class="label label-success">Active</span>Now
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="card dashboard-product">
+            <span>Cvs</span>
+            <h2 class="dashboard-total-products"><span>@cvs.Where(x=>x.Status==OrderStatus.Accepted).Count()</span></h2>
+            <span class="label label-danger">Active</span>Now
+        </div>
+    </div>
+</div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>CV and Vacancy table by BusinessArea</h5>
+                </div>
+                <div class="card-block">
+                    <canvas id="chart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            var labels = @Html.Raw(Json.Serialize(ViewBag.Labels));
+            var dataset1Data = @Html.Raw(Json.Serialize(ViewBag.Dataset1Data));
+            var dataset2Data = @Html.Raw(Json.Serialize(ViewBag.Dataset2Data));
+            var data = {
+                labels: labels,
+                datasets: [
+                    {
+                        label: "CV Sayı",
+                        backgroundColor: "rgba(75, 192, 192, 0.2)",
+                        borderColor: "rgba(75, 192, 192, 1)",
+                        data: dataset1Data
+                    },
+                    {
+                        label: "Vacans Sayı",
+                        backgroundColor: "rgba(255, 99, 132, 0.2)",
+                        borderColor: "rgba(255, 99, 132, 1)",
+                        data: dataset2Data
+                    }
+                ]
+            };
+            var ctx = document.getElementById("chart").getContext("2d");
+            var chart = new Chart(ctx, {
+                type: "line",
+                data: data,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>CV and Vacancy table by OperatingModes</h5>
+                </div>
+                <div class="card-block">
+                    <canvas id="chart_modes"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            var labels = @Html.Raw(Json.Serialize(ViewBag.LabelsMode));
+            var dataset3Data = @Html.Raw(Json.Serialize(ViewBag.Dataset3Data));
+            var dataset4Data = @Html.Raw(Json.Serialize(ViewBag.Dataset4Data));
+            var data = {
+                labels: labels,
+                datasets: [
+                    {
+                        label: "CV Sayı",
+                        backgroundColor: "rgba(75, 192, 192, 0.2)",
+                        borderColor: "rgba(75, 192, 192, 1)",
+                        data: dataset1Data
+                    },
+                    {
+                        label: "Vacans Sayı",
+                        backgroundColor: "rgba(255, 99, 132, 0.2)",
+                        borderColor: "rgba(255, 99, 132, 1)",
+                        data: dataset2Data
+                    }
+                ]
+            };
+            var ctx = document.getElementById("chart_modes").getContext("2d");
+            var chart = new Chart(ctx, {
+                type: "line",
+                data: data,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+        <div class="col-md-6 col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Vacancy numbers of companies</h5>
+                </div>
+                <div class="card-block">
+                    <canvas id="morris-bar-chart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            var labels = @Html.Raw(Json.Serialize(ViewBag.LabelsCompany));
+            var datasetData = @Html.Raw(Json.Serialize(ViewBag.DatasetData));
+
+            var data = {
+                labels: labels,
+                datasets: [
+                    {
+                        label: "Vacans Sayı",
+                        backgroundColor: "rgba(75, 192, 192, 0.2)",
+                        borderColor: "rgba(75, 192, 192, 1)",
+                        data: datasetData
+                    }
+                ]
+            };
+
+            var ctx = document.getElementById("morris-bar-chart").getContext("2d");
+            var chart = new Chart(ctx, {
+                type: "bar",
+                data: data,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+    </div>

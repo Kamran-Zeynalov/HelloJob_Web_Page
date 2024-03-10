@@ -1,0 +1,149 @@
+﻿@{
+    Dictionary<string, string> setting = ViewBag.Setting;
+
+}
+@model List<Cv>
+@foreach (Cv cv in Model)
+{
+    <div id="userBlocks" class="user_block">
+        <a asp-controller="cvpage" asp-action="detail" asp-route-id="@cv.Id" target="_blank">
+            <div class="header_user">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="user_img">
+                        <img src="~/assets/images/User/@cv.Image" alt="">
+                    </div>
+                    <div class="d-flex justify-content-between w-100">
+                        <div class="user_desc">
+                            <h3 class="profession">@cv.Position</h3>
+
+                            <p class="fullname">@string.Concat(cv.Name," ",cv.Surname)</p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="user_options" style="justify-content:space-around !important">
+                <div class="item">
+                    <div class="icon">
+                        <img src="~/assets/images/@setting["UserOperatingModeIcon"]"
+                             alt="" />
+                    </div>
+                    <div class="text">
+                        <h4>@cv.OperatingMode.Name</h4>
+                        <p>İş rejimi</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="icon">
+                        <img src="~/assets/images/@setting["SalaryIcon"]"
+                             alt="" />
+                    </div>
+                    <div class="text">
+                        <h4>@(cv.Salary == 0 ? "Ə-h razılaşma ilə" : cv.Salary) (AZN)</h4>
+                        <p>Minimum əmək haqqı</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="icon">
+                        <img src="~/assets/images/@setting["ExperienceIcon"]"
+                             alt="" />
+                    </div>
+                    <div class="text">
+                        <h4>@cv.Experience.Name</h4>
+                        <p>İş staji</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+        <div class="hearts">
+            <span class="like">
+                <a class="like-button" data-item-id="@cv.Id" data-item-type="Cv">
+                    <i class="fa-regular fa-heart unliked"></i>
+                </a>
+                <a class="unliked-button" data-item-id="@cv.Id" data-item-type="Cv">
+                    <i class="fa-solid fa-heart liked @(cv.WishListItems.Any(w => w.WishList.User.UserName == User.Identity.Name && w.IsLiked == true) ? "hidden" : "")"></i>
+                </a>
+            </span>
+        </div>
+    </div>
+}
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+            <a class="page-link" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage-1)" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+
+        @if (ViewBag.TotalPage <= 5)
+        {
+            @for (int i = 1; i <= (int)ViewBag.TotalPage; i++)
+            {
+                <li class="page-item @(i == ViewBag.CurrentPage ? "disabled" : "")">
+                    <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                </li>
+            }
+        }
+        else
+        {
+            @if (ViewBag.CurrentPage <= 3)
+            {
+                for (int i = 1; i <= 5; i++)
+                {
+                    <li class="page-item @(i == ViewBag.CurrentPage ? "disabled" : "")">
+                        <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                    </li>
+                }
+                <li class="page-item disabled">
+                    <a class="page-link">...</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" asp-action="Index" asp-route-page="@ViewBag.TotalPage">@ViewBag.TotalPage</a>
+                </li>
+            }
+            else if (ViewBag.CurrentPage >= (int)ViewBag.TotalPage - 2)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-action="Index" asp-route-page="1">1</a>
+                </li>
+                <li class="page-item disabled">
+                    <a class="page-link">...</a>
+                </li>
+                for (int i = (int)ViewBag.TotalPage - 4; i <= (int)ViewBag.TotalPage; i++)
+                {
+                    <li class="page-item @(i == ViewBag.CurrentPage ? "disabled" : "")">
+                        <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                    </li>
+                }
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-action="Index" asp-route-page="1">1</a>
+                </li>
+                <li class="page-item disabled">
+                    <a class="page-link">...</a>
+                </li>
+                for (int i = ViewBag.CurrentPage - 2; i <= ViewBag.CurrentPage + 2; i++)
+                {
+                    <li class="page-item @(i == ViewBag.CurrentPage ? "disabled" : "")">
+                        <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                    </li>
+                }
+                <li class="page-item disabled">
+                    <a class="page-link">...</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" asp-action="Index" asp-route-page="@ViewBag.TotalPage">@ViewBag.TotalPage</a>
+                </li>
+            }
+        }
+
+        <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPage ? "disabled" : "")">
+            <a class="page-link" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage+1)" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
