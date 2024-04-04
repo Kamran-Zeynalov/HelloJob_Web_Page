@@ -99,7 +99,7 @@ namespace HelloJobBackEnd.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -109,6 +109,9 @@ namespace HelloJobBackEnd.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.HasIndex("UserId");
 
@@ -844,7 +847,7 @@ namespace HelloJobBackEnd.Migrations
                     b.HasOne("HelloJobBackEnd.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("HelloJobBackEnd.Entities.Vacans", null)
@@ -935,7 +938,7 @@ namespace HelloJobBackEnd.Migrations
                     b.HasOne("HelloJobBackEnd.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("User");

@@ -1349,10 +1349,6 @@
       "PackagePath": "staticwebassets\\assets\\images\\User\\64photo_2023-05-14_12-45-48.jpg"
     },
     {
-      "Id": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\assets\\images\\User\\694Screenshot 2024-02-18 025227.png",
-      "PackagePath": "staticwebassets\\assets\\images\\User\\694Screenshot 2024-02-18 025227.png"
-    },
-    {
       "Id": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\assets\\images\\User\\71211.jpg",
       "PackagePath": "staticwebassets\\assets\\images\\User\\71211.jpg"
     },
@@ -1485,10 +1481,6 @@
       "PackagePath": "staticwebassets\\assets\\images\\User\\CVs\\577customer.docx"
     },
     {
-      "Id": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\assets\\images\\User\\CVs\\605Kamran-ZeynalovCV.pdf",
-      "PackagePath": "staticwebassets\\assets\\images\\User\\CVs\\605Kamran-ZeynalovCV.pdf"
-    },
-    {
       "Id": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\assets\\images\\User\\CVs\\623cashier.docx",
       "PackagePath": "staticwebassets\\assets\\images\\User\\CVs\\623cashier.docx"
     },
@@ -1523,6 +1515,10 @@
     {
       "Id": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\assets\\images\\User\\CVs\\855cashier.docx",
       "PackagePath": "staticwebassets\\assets\\images\\User\\CVs\\855cashier.docx"
+    },
+    {
+      "Id": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\assets\\images\\User\\CVs\\873Kamran-ZeynalovCV.pdf",
+      "PackagePath": "staticwebassets\\assets\\images\\User\\CVs\\873Kamran-ZeynalovCV.pdf"
     },
     {
       "Id": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\assets\\images\\User\\CVs\\87Cv.pdf",

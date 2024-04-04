@@ -86,7 +86,6 @@ namespace HelloJobBackEnd.Services
             if (educationIds?.Length > 0)
             {
                 cvs = cvs.Where(c => educationIds.Contains(c.Education.Id));
-
             }
 
             if (experienceIds?.Length > 0)

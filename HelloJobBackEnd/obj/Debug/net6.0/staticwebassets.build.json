@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "JxfE/7RZ6qzq/OROfMWdCA0itN07QJ3BuGY1zFMNuNo=",
+  "Hash": "AVXxdEvVJeSKo18icPudcyCuLTFjEQIj+stV+SEAsno=",
   "Source": "HelloJobBackEnd",
   "BasePath": "_content/HelloJobBackEnd",
   "Mode": "Default",
@@ -6477,25 +6477,6 @@
       "OriginalItemSpec": "wwwroot\\assets\\images\\User\\64photo_2023-05-14_12-45-48.jpg"
     },
     {
-      "Identity": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\assets\\images\\User\\694Screenshot 2024-02-18 025227.png",
-      "SourceId": "HelloJobBackEnd",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\",
-      "BasePath": "_content/HelloJobBackEnd",
-      "RelativePath": "assets/images/User/694Screenshot 2024-02-18 025227.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\images\\User\\694Screenshot 2024-02-18 025227.png"
-    },
-    {
       "Identity": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\assets\\images\\User\\71211.jpg",
       "SourceId": "HelloJobBackEnd",
       "SourceType": "Discovered",
@@ -7123,25 +7104,6 @@
       "OriginalItemSpec": "wwwroot\\assets\\images\\User\\CVs\\577customer.docx"
     },
     {
-      "Identity": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\assets\\images\\User\\CVs\\605Kamran-ZeynalovCV.pdf",
-      "SourceId": "HelloJobBackEnd",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\",
-      "BasePath": "_content/HelloJobBackEnd",
-      "RelativePath": "assets/images/User/CVs/605Kamran-ZeynalovCV.pdf",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\images\\User\\CVs\\605Kamran-ZeynalovCV.pdf"
-    },
-    {
       "Identity": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\assets\\images\\User\\CVs\\623cashier.docx",
       "SourceId": "HelloJobBackEnd",
       "SourceType": "Discovered",
@@ -7311,6 +7273,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\User\\CVs\\855cashier.docx"
+    },
+    {
+      "Identity": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\assets\\images\\User\\CVs\\873Kamran-ZeynalovCV.pdf",
+      "SourceId": "HelloJobBackEnd",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\",
+      "BasePath": "_content/HelloJobBackEnd",
+      "RelativePath": "assets/images/User/CVs/873Kamran-ZeynalovCV.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\User\\CVs\\873Kamran-ZeynalovCV.pdf"
     },
     {
       "Identity": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\assets\\images\\User\\CVs\\87Cv.pdf",

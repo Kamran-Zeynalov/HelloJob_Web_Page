@@ -27,9 +27,9 @@ namespace HelloJobBackEnd.Services
 
         public Dictionary<string, string> GetSettings()
         {
-            Dictionary<string, string> settings = _context.Settings.ToDictionary(s => s.Key, s => s.Value);
+            Dictionary<string, string>? settings = _context.Settings.ToDictionary(s => s.Key, s => s.Value);
 
-            return settings;
+            return settings ?? new Dictionary<string, string>();
         }
 
         public (List<Cv> cvList, List<Company> companyList, List<Vacans> vacansList) GetAllData()
