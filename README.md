@@ -8,8 +8,6 @@ Qeydiyyat zamanı kateqoriya göstərilməli və qeydiyyatı təsdiq etməlisini
   
 - Admin Panelinə daxil olmaq üçün əvvəlcə "https://localhost:7120/HelloJobAdmins/adminlogin/login#" (istifadəçi adı:hellojob_superadmins) linkindən istifadə edin parol: Salam123456)
 
-
-
 - Admin Panelinin Bildirişlər bölməsində siz yeni paylaşılan və gözlənilən elanları görə bilərsiniz.
 
 - Hər hansı problem yaranarsa Wp vasitəsilə əlaqə saxlayın və ya +994507709254 nömrəsinə zəng edin
