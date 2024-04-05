@@ -130,14 +130,25 @@
                 <td>
                     @Html.DisplayFor(model => item.TimeIsOver)
                 </td>
-            <td>
-                    <a asp-action="Accept" asp-route-id="@item.Id" class="btn btn-inverse waves-effect waves-light">Accept</a>
+                @if (item.Status == 0)
+                {
+                    <td>
+                        <a asp-action="Accept" asp-route-id="@item.Id" class="btn btn-inverse waves-effect waves-light">Accept</a>
                     <a asp-action="Reject" asp-route-id="@item.Id" class="btn btn-success waves-effect waves-light">Reject</a>
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info waves-effect waves-light">Details</a>
                     <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger waves-effect waves-light">Delete</a>
 
-            </td>
-        </tr>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info waves-effect waves-light">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger waves-effect waves-light">Delete</a>
+
+                    </td>
+                }
+            </tr>
 }
      
     </tbody>

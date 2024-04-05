@@ -33,49 +33,44 @@
         <form asp-controller="AdminRegister" asp-action="Register" method="post">
             <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
             <div class="user-box">
-                <span asp-validation-for="Firstname" class="text-light"></span>
+                <span asp-validation-for="Firstname" class="text-danger"></span>
                 <input asp-for=Firstname class="user-box-input" autocomplete="off">
                 <label asp-for=Firstname class="user-box-label">Firstname</label>
             </div>
             <div class="user-box">
-                <span asp-validation-for="Lastname" class="text-light"></span>
+                <span asp-validation-for="Lastname" class="text-danger"></span>
                 <input asp-for=Lastname class="user-box-input">
                 <label asp-for=Lastname class="user-box-label">LastName</label>
             </div>
             <div class="user-box">
-                <span asp-validation-for="Username" class="text-light"></span>
+                <span asp-validation-for="Username" class="text-danger"></span>
                 <input asp-for=Username class="user-box-input" autocomplete="off">
                 <label asp-for=Username class="user-box-label">UserName</label>
 
             </div>
             <div class="user-box">
-                <span asp-validation-for="Email " class="text-light"></span>
+                <span asp-validation-for="Email " class="text-danger"></span>
                 <input asp-for=Email class="user-box-input" autocomplete="off">
                 <label asp-for=Email class="user-box-label">Email</label>
 
             </div>
             <div class="user-box">
-                <span asp-validation-for="Password" class="text-light"></span>
+                <span asp-validation-for="Password" class="text-danger"></span>
                 <input asp-for=Password class="user-box-input " autocomplete="off">
                 <label asp-for=Password class="user-box-label">Password</label>
             </div>
             <div class="user-box">
-                <span asp-validation-for="ConfirmPassword" class="text-light"></span>
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 <input asp-for=ConfirmPassword class="user-box-input" autocomplete="off">
                 <label asp-for=ConfirmPassword class="user-box-label">Confirm Password</label>
             </div>
             <div class="user-box">
-                <span asp-validation-for="adminRoles" class="text-light"></span>
+                <span asp-validation-for="adminRoles" class="text-danger"></span>
                 <label class="form-label" asp-for="adminRoles" style="color: #8ab0df;">Admin's Role</label>
                 <select asp-for="adminRoles" class="form-select role mb-3">
                     <option value="@AdminRoles.admin">Admin</option>
                     <option value="@AdminRoles.moderator">Moderator</option>
                 </select>
-            </div>
-            <div class="user-box">
-                <span asp-validation-for="Terms" class="text-light"></span>
-                <input asp-for="Terms">
-                <span style="color: #8ab0df">Accepted Registration </span>
             </div>
      
             <a type="submit" class="login-box-button href_admin" href="#">

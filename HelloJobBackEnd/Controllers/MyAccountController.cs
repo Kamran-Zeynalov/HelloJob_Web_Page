@@ -300,6 +300,10 @@ namespace HelloJobBackEnd.Controllers
 
             if (!ModelState.IsValid)
             {
+                foreach (string message in ModelState.Values.SelectMany(e => e.Errors).Select(e => e.ErrorMessage))
+                {
+                    ModelState.AddModelError("", message);
+                }
                 return View();
             }
 
@@ -762,6 +766,7 @@ namespace HelloJobBackEnd.Controllers
         [HttpPost]
         public async Task<IActionResult> Security(ProfileVM profileVM)
         {
+            TempData["Security"] = false;
             if (!ModelState.IsValid)
             {
                 foreach (string message in ModelState.Values.SelectMany(e => e.Errors).Select(e => e.ErrorMessage))
@@ -769,9 +774,18 @@ namespace HelloJobBackEnd.Controllers
                     ModelState.AddModelError("", message);
                 }
             }
-            TempData["Security"] = false;
             User user = await _usermanager.FindByNameAsync(User.Identity.Name);
             ViewBags(user);
+            if (profileVM.CurrentPassword is not null && (profileVM.NewPassword is null || profileVM.ConfirmNewPassword is null))
+            {
+                ModelState.AddModelError("", "Somethings wrong");
+                return View();
+            }
+            if (profileVM.CurrentPassword is null && (profileVM.NewPassword is not null || profileVM.ConfirmNewPassword is not null))
+            {
+                ModelState.AddModelError("", "Somethings wrong");
+                return View();
+            }
             if (!string.IsNullOrWhiteSpace(profileVM.ConfirmNewPassword) && !string.IsNullOrWhiteSpace(profileVM.NewPassword))
             {
                 var passwordChangeResult = await _usermanager.ChangePasswordAsync(user, profileVM.CurrentPassword, profileVM.NewPassword);

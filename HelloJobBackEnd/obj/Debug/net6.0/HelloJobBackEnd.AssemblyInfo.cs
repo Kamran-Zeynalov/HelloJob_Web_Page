@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HelloJobBackEnd")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+309aabcefea3657f47eec39c70bb3ec72b4cba88")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+627406996f02babc6b3a14c90fd4277f86f6c492")]
 [assembly: System.Reflection.AssemblyProductAttribute("HelloJobBackEnd")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HelloJobBackEnd")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

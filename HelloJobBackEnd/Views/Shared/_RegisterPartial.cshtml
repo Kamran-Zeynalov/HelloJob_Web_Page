@@ -5,32 +5,32 @@
         <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
         <div class="inputs_lg form-group">
             <label asp-for="Firstname"></label>
-            <input asp-for="Firstname" placeholder="Adınızı yazın" required>
+            <input style="padding:3px 5px" asp-for="Firstname" placeholder="Adınızı yazın" required>
             <span asp-validation-for="Firstname"></span>
         </div>
         <div class="inputs_lg form-group">
             <label asp-for="Lastname"></label>
-            <input asp-for="Lastname" placeholder="Soyadınızı yazın" required>
+            <input style="padding:3px 5px" asp-for="Lastname" placeholder="Soyadınızı yazın" required>
             <span asp-validation-for="Lastname"></span>
         </div>
         <div class="inputs_lg form-group">
             <label asp-for="Email"></label>
-            <input asp-for="Email" placeholder="E-poçtunuzu yazın" required>
+            <input style="padding:3px 5px" asp-for="Email" placeholder="E-poçtunuzu yazın" required>
             <span asp-validation-for="Email"></span>
         </div>
         <div class="inputs_lg form-group">
             <label asp-for="Username"></label>
-            <input asp-for="Username" placeholder="Istifadeci adi yazın" required>
+            <input style="padding:3px 5px" asp-for="Username" placeholder="Istifadeci adi yazın" required>
             <span asp-validation-for="Username"></span>
         </div>
         <div class="inputs_lg form-group">
             <label asp-for="Password"></label>
-            <input asp-for="Password" placeholder="********">
+            <input style="padding:3px 5px" asp-for="Password" placeholder="********">
             <span asp-validation-for="Password"></span>
         </div>
         <div class="inputs_lg form-group">
             <label asp-for="ConfirmPassword"></label>
-            <input asp-for="ConfirmPassword" placeholder="********" required>
+            <input style="padding:3px 5px" asp-for="ConfirmPassword" placeholder="********" required>
             <span asp-validation-for="ConfirmPassword"></span>
         </div>
 
@@ -44,11 +44,10 @@
         </div>
         <div class="log_foot">
             <div class="rememberme form-group">
-                <input asp-for="Terms" required>
-                <span>Qeydiyyatı Təsdiqlə</span>
+                <input id="terms" asp-for="Terms" required>
+                <label for="terms">Qeydiyyatı Təsdiqlə</label>
                 <span asp-validation-for="Terms"></span>
             </div>
-
         </div>
         <div class="buttons_sbmt">
             <div class="register_submit">

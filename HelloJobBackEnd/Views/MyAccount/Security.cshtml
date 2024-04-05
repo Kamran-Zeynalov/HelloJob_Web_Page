@@ -145,6 +145,7 @@
                     <div class="col-lg-6">
                         <div class="allsecurity">
                             <form asp-controller="myaccount" asp-action="security">
+                                <div class="text-danger" asp-validation-summary="ModelOnly"></div>
                                 <div class="security-inputs">
                                     <label asp-for="Email">E-poçt</label>
                                     <input asp-for="Email"
@@ -388,7 +389,7 @@
 @section Scripts{
     <script>
         function confirmDelete() {
-            var confirmation = confirm("Hesabıvızı silməyə əminsiniz?");
+            var confirmation = confirm("Hesabınızı silməyə əminsiniz?");
             return confirmation;
         }
     </script>

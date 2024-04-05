@@ -4,7 +4,7 @@
     <form asp-controller="Account" asp-action="Login">
         <div class="inputs_lg form-group">
             <label asp-for="UserName"></label>
-            <input asp-for="UserName" placeholder="E-poçtunuzu yazın" required>
+            <input asp-for="UserName" placeholder="istifadəçi adınızı yazın" required>
             <span asp-validation-for="UserName"></span>
 
         </div>
@@ -15,8 +15,8 @@
         </div>
         <div class="log_foot">
             <div class="rememberme form-group">
-                <input asp-for="RememberMe">
-                <span>Yadda saxla</span>
+                <input id="rem" asp-for="RememberMe">
+                <label for="rem">Yadda saxla</label>
             </div>
             <a class="regs_bopup_open" style="cursor: pointer;">Şifrəni unutmuşam</a>
 

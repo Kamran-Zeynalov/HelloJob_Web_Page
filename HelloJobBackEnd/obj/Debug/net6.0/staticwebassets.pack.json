@@ -1269,6 +1269,10 @@
       "PackagePath": "staticwebassets\\assets\\images\\Company\\860coffamena.png"
     },
     {
+      "Id": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\assets\\images\\Company\\979Kapital-Logo-Stacked-V2-RGB.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\Company\\979Kapital-Logo-Stacked-V2-RGB.jpg"
+    },
+    {
       "Id": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\assets\\images\\Screenshot 2023-05-09 143145.png",
       "PackagePath": "staticwebassets\\assets\\images\\Screenshot 2023-05-09 143145.png"
     },
@@ -1287,6 +1291,14 @@
     {
       "Id": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\assets\\images\\User\\17516.jpg",
       "PackagePath": "staticwebassets\\assets\\images\\User\\17516.jpg"
+    },
+    {
+      "Id": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\assets\\images\\User\\179Donald_Trump_official_portrait.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\User\\179Donald_Trump_official_portrait.jpg"
+    },
+    {
+      "Id": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\assets\\images\\User\\187Donald_Trump_official_portrait.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\User\\187Donald_Trump_official_portrait.jpg"
     },
     {
       "Id": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\assets\\images\\User\\19710.jpeg",
@@ -1315,6 +1327,14 @@
     {
       "Id": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\assets\\images\\User\\29223.jpg",
       "PackagePath": "staticwebassets\\assets\\images\\User\\29223.jpg"
+    },
+    {
+      "Id": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\assets\\images\\User\\293Donald_Trump_official_portrait.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\User\\293Donald_Trump_official_portrait.jpg"
+    },
+    {
+      "Id": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\assets\\images\\User\\33Donald_Trump_official_portrait.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\User\\33Donald_Trump_official_portrait.jpg"
     },
     {
       "Id": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\assets\\images\\User\\454photo_2023-05-14_12-45-48.jpg",
@@ -1347,6 +1367,10 @@
     {
       "Id": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\assets\\images\\User\\64photo_2023-05-14_12-45-48.jpg",
       "PackagePath": "staticwebassets\\assets\\images\\User\\64photo_2023-05-14_12-45-48.jpg"
+    },
+    {
+      "Id": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\assets\\images\\User\\655Donald_Trump_official_portrait.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\User\\655Donald_Trump_official_portrait.jpg"
     },
     {
       "Id": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\assets\\images\\User\\71211.jpg",
@@ -1471,6 +1495,10 @@
     {
       "Id": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\assets\\images\\User\\CVs\\552Cv.pdf",
       "PackagePath": "staticwebassets\\assets\\images\\User\\CVs\\552Cv.pdf"
+    },
+    {
+      "Id": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\assets\\images\\User\\CVs\\553Kamran-ZeynalovCV.pdf",
+      "PackagePath": "staticwebassets\\assets\\images\\User\\CVs\\553Kamran-ZeynalovCV.pdf"
     },
     {
       "Id": "C:\\Users\\kzeyn\\OneDrive\\Desktop\\HelloJob_BackEnd\\HelloJobBackEnd\\wwwroot\\assets\\images\\User\\CVs\\566Cv.pdf",

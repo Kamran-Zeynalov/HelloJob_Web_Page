@@ -329,7 +329,11 @@ namespace HelloJobBackEnd.Controllers
                 User = user,
                 Token = account.Token
             };
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Somethings wrong");
+                return View(model);
+            }
             await _usermanager.ResetPasswordAsync(user, account.Token, account.Password);
             TempData["Security"] = true;
             return RedirectToAction("Index", "Home");

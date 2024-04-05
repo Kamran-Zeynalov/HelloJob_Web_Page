@@ -53,7 +53,7 @@
                 @Html.DisplayFor(modelItem => item.Vacans)
             </td>
             <td>
-                @string.Concat(item.Rule.Substring(0,20),"....")
+                    @(item.Rule.Length > 20 ? string.Concat(item.Rule.Substring(0, 20), "....") : item.Rule)
             </td>
             <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn waves-effect waves-light btn-warning btn-outline-warning">Edit</a>

@@ -102,11 +102,22 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
-            <td>
-                    <a asp-action="Accept" asp-route-id="@item.Id" class="btn btn-inverse waves-effect waves-light">Accept</a>
-                    <a asp-action="Reject" asp-route-id="@item.Id" class="btn btn-success waves-effect waves-light">Reject</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger waves-effect waves-light">Delete</a>
-            </td>
+                @if (item.Status == 0)
+                {
+                    <td>
+                        <a asp-action="Accept" asp-route-id="@item.Id" class="btn btn-inverse waves-effect waves-light">Accept</a>
+                        <a asp-action="Reject" asp-route-id="@item.Id" class="btn btn-success waves-effect waves-light">Reject</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger waves-effect waves-light">Delete</a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger waves-effect waves-light">Delete</a>
+                    </td>
+                }
+                
+              
         </tr>
 }
     </tbody>

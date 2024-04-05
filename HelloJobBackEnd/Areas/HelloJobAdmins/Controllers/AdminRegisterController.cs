@@ -8,7 +8,7 @@ using NuGet.Protocol.Plugins;
 
 namespace HelloJobBackEnd.Areas.HelloJobAdmins.Controllers
 {
-    [Authorize(Roles = "superadmin")]
+    //[Authorize(Roles = "superadmin")]
     [Area("HelloJobAdmins")]
     public class AdminRegisterController : Controller
     {
