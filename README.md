@@ -6,9 +6,6 @@ Qeydiyyat zamanı kateqoriya göstərilməli və qeydiyyatı təsdiq etməlisini
 
 - İş axtaran kimi qeydiyyatdan keçsəniz və ya daxil olsanız, gördüyünüz vakansiyalara öz CV-nizlə müraciət edə bilərsiniz. (CV yaradarkən CV.PDF faylı mütləqdir)
   
-
-- Google və Facebook sizin üçün işləməyə bilər, çünki onlar mənim LocalHost-a bağlıdırlar
-
 - Admin Panelinə daxil olmaq üçün əvvəlcə "https://localhost:7120/HelloJobAdmins/adminlogin/login#" (istifadəçi adı:hellojob_superadmins) linkindən istifadə edin parol: Salam123456)
 
 
